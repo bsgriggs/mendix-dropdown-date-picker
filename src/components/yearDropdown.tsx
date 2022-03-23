@@ -1,4 +1,4 @@
-import React, { createElement, ReactElement } from "react";
+import React, { createElement } from "react";
 // import Select from 'react-select';
 
 export type yearDropdownProps = {
@@ -10,17 +10,17 @@ export type yearDropdownProps = {
     disabled: boolean;
 };
 
-const YearDropdown = (props: yearDropdownProps) => {
-    const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+const YearDropdown = (props: yearDropdownProps): JSX.Element => {
+    const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>): void => {
         try {
-            props.setYear(parseInt(event.target.value));
+            props.setYear(parseInt(event.target.value, 10));
         } catch (e) {
             console.error(e);
         }
     };
 
-    const renderOptions = () => {
-        const options: Array<ReactElement> = [];
+    const renderOptions = (): JSX.Element[] => {
+        const options: JSX.Element[] = [];
         for (let i: number = props.maxYear; i >= props.minYear; i--) {
             options.push(
                 <option value={i} aria-selected={props.year === i} selected={props.year === i}>

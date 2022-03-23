@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="dropdowndatepicker.DropdownDatePicker" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
-        supportedPlatform="Web"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+<widget id="dropdowndatepicker.DropdownDatePicker" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
     <name>Dropdown Date Picker</name>
     <description>Datepicker with a dropdowns for Day, Month, and Year with dynamic selection</description>
-    <icon/>
+    <icon />
     <properties>
         <propertyGroup caption="General">
-            <systemProperty key="Label"/>
+            <systemProperty key="Label" />
             <property key="date" type="attribute" required="true" onChange="onDateChange">
                 <caption>Date</caption>
                 <description>The attribute to write the selected Date</description>
                 <attributeTypes>
-                    <attributeType name="DateTime"/>
+                    <attributeType name="DateTime" />
                 </attributeTypes>
             </property>
             <property key="onDateChange" type="action">
                 <caption>On change</caption>
-                <description>Action excuted after ALL dropdowns are selected.</description>
+                <description>Action excuted after ALL dropdowns are selected</description>
             </property>
-            <systemProperty key="Visibility"/>
-            <systemProperty key="Editability"/>
+            <systemProperty key="Visibility" />
+            <systemProperty key="Editability" />
         </propertyGroup>
         <propertyGroup caption="Common">
-            <systemProperty key="Name"/>
-            <systemProperty key="TabIndex"/>
+            <systemProperty key="Name" />
+            <systemProperty key="TabIndex" />
         </propertyGroup>
         <propertyGroup caption="Month Settings">
             <property key="useMonth" type="boolean" defaultValue="true">
                 <caption>Use Month?</caption>
                 <description>Show the Month dropdown?</description>
+            </property>
+            <property key="defaultMonth" type="expression" required="true" defaultValue="0">
+                <caption>Default Month</caption>
+                <description>Month used to create the date if Use Month = NO (0 = Jan, 1 = Feb ... 11 = Dec)</description>
+                <returnType type="Integer" />
             </property>
             <property key="monthSort" type="expression" required="true" defaultValue="1">
                 <caption>Month Sort</caption>
@@ -43,7 +45,7 @@
             </property>
             <property key="monthType" type="enumeration" defaultValue="num">
                 <caption>Month Display</caption>
-                <description>Which values to display in the month dropdown. (9, Sep, September)</description>
+                <description>Which values to display in the month dropdown (9, Sep, September)</description>
                 <enumerationValues>
                     <enumerationValue key="num">Number</enumerationValue>
                     <enumerationValue key="abbr">Abbreviation</enumerationValue>
@@ -55,6 +57,11 @@
             <property key="useDay" type="boolean" defaultValue="true">
                 <caption>Use Day?</caption>
                 <description>Show the Day dropdown?</description>
+            </property>
+            <property key="defaultDay" type="expression" required="true" defaultValue="1">
+                <caption>Default Day</caption>
+                <description>Day used to create the date if Use Day = NO</description>
+                <returnType type="Integer" />
             </property>
             <property key="daySort" type="expression" required="true" defaultValue="2">
                 <caption>Day Sort</caption>
@@ -70,6 +77,11 @@
             <property key="useYear" type="boolean" defaultValue="true">
                 <caption>Use Year?</caption>
                 <description>Show the Year dropdown?</description>
+            </property>
+            <property key="defaultYear" type="expression" required="true" defaultValue="0">
+                <caption>Default Year</caption>
+                <description>Number of Years from the current Year used to create the date if Use Month = NO (0 = current year, -3 = 3 years ago)</description>
+                <returnType type="Integer" />
             </property>
             <property key="yearSort" type="expression" required="true" defaultValue="3">
                 <caption>Year Sort</caption>

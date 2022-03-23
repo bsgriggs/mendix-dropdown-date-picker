@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { createElement, useState, useEffect } from "react";
 import DayDropdown, { maxDaysInMonth } from "./components/dayDropdown";
 import MonthDropdown from "./components/monthDropdown";
 import YearDropdown from "./components/yearDropdown";
@@ -13,127 +13,159 @@ type DropdownDatePickerContainerState = {
     year: number;
 };
 
-export default class DropdownDatePicker extends Component<
-    DropdownDatePickerContainerProps,
-    DropdownDatePickerContainerState
-> {
-    state: DropdownDatePickerContainerState = {
-        month: this.props.useMonth ? (this.props.date.value !== undefined ? this.props.date.value.getMonth() : -1) : 1,
-        day: this.props.useDay ? (this.props.date.value !== undefined ? this.props.date.value.getDate() : -1) : 1,
-        year: this.props.useYear
-            ? this.props.date.value !== undefined
-                ? this.props.date.value.getFullYear()
-                : -1
-            : new Date().getFullYear()
-    };
+type dropdown = {
+    sort: number;
+    jsx: JSX.Element;
+};
 
-    sortDropdowns() {
-        const dropdowns = [];
+const DropdownDatePicker = (props: DropdownDatePickerContainerProps): JSX.Element => {
+    // set state default values, -1 shows the select's label
+    const [dropdownState, setDropdownState] = useState<DropdownDatePickerContainerState>({
+        month: -1,
+        day: -1,
+        year: -1
+    });
+    // sort the order of the dropdowns based on the sort widget settings
+    const sortDropdowns = (): dropdown[] => {
+        const dropdowns: dropdown[] = [];
         if (
-            this.props.minYear.status === ValueStatus.Available &&
-            this.props.maxYear.status === ValueStatus.Available &&
-            this.props.monthSort.status === ValueStatus.Available &&
-            this.props.daySort.status === ValueStatus.Available &&
-            this.props.yearSort.status === ValueStatus.Available
+            props.minYear.status === ValueStatus.Available &&
+            props.maxYear.status === ValueStatus.Available &&
+            props.monthSort.status === ValueStatus.Available &&
+            props.daySort.status === ValueStatus.Available &&
+            props.yearSort.status === ValueStatus.Available
         ) {
-            if (this.props.useMonth) {
+            if (props.useMonth) {
                 dropdowns.push({
-                    sort: parseFloat(this.props.monthSort.value.toFixed(0)),
+                    sort: parseFloat(props.monthSort.value.toFixed(0)),
                     jsx: (
                         <MonthDropdown
-                            month={this.state.month}
-                            monthType={this.props.monthType}
-                            monthLabel={this.props.monthLabel}
-                            setMonth={(newMonth: number) => this.handleChange({ ...this.state, month: newMonth })}
-                            disabled={this.props.date.readOnly}
+                            month={dropdownState.month}
+                            monthType={props.monthType}
+                            monthLabel={props.monthLabel}
+                            setMonth={(newMonth: number) => handleChange({ ...dropdownState, month: newMonth })}
+                            disabled={props.date.readOnly}
                         />
                     )
                 });
             }
-            if (this.props.useDay) {
+            if (props.useDay) {
                 dropdowns.push({
-                    sort: parseFloat(this.props.daySort.value.toFixed(0)),
+                    sort: parseFloat(props.daySort.value.toFixed(0)),
                     jsx: (
                         <DayDropdown
-                            dayLabel={this.props.dayLabel}
-                            setDay={(newDay: number) => this.handleChange({ ...this.state, day: newDay })}
-                            month={this.state.month}
-                            day={this.state.day}
-                            year={this.state.year}
-                            disabled={this.props.date.readOnly}
+                            dayLabel={props.dayLabel}
+                            setDay={(newDay: number) => handleChange({ ...dropdownState, day: newDay })}
+                            month={dropdownState.month}
+                            day={dropdownState.day}
+                            year={dropdownState.year}
+                            disabled={props.date.readOnly}
                         />
                     )
                 });
             }
-            if (this.props.useYear) {
+            if (props.useYear) {
                 dropdowns.push({
-                    sort: parseFloat(this.props.yearSort.value.toFixed(0)),
+                    sort: parseFloat(props.yearSort.value.toFixed(0)),
                     jsx: (
                         <YearDropdown
-                            year={this.state.year}
-                            minYear={parseFloat(this.props.minYear.value.toFixed(0))}
-                            maxYear={parseFloat(this.props.maxYear.value.toFixed(0))}
-                            yearLabel={this.props.yearLabel}
-                            setYear={(newYear: number) => this.handleChange({ ...this.state, year: newYear })}
-                            disabled={this.props.date.readOnly}
+                            year={dropdownState.year}
+                            minYear={parseFloat(props.minYear.value.toFixed(0))}
+                            maxYear={parseFloat(props.maxYear.value.toFixed(0))}
+                            yearLabel={props.yearLabel}
+                            setYear={(newYear: number) => handleChange({ ...dropdownState, year: newYear })}
+                            disabled={props.date.readOnly}
                         />
                     )
                 });
             }
         }
         return dropdowns;
-    }
+    };
 
-    render() {
-        console.log("Props", this.props);
-        if (
-            this.props.minYear.status === ValueStatus.Available &&
-            this.props.maxYear.status === ValueStatus.Available &&
-            this.props.date.status === ValueStatus.Available
-        ) {
-            return (
-                <div id={this.props.name} className={"widget-dropdowndatepicker " + this.props.class}>
-                    {this.sortDropdowns()
-                        .sort((a, b) => a.sort - b.sort)
-                        .map(dropdown => {
-                            return dropdown.jsx;
-                        })}
-                </div>
-            );
-        } else {
-            return (
-                <div id={this.props.name} className={this.props.class ? "widget-dropdowndatepicker " + this.props.class : "widget-dropdowndatepicker"}>
-                    <span style={{ display: "none" }}>loading</span>
-                </div>
-            );
-        }
-    }
-
-    handleChange(newState: DropdownDatePickerContainerState) {
-        this.setState(newState);
+    const handleChange = (newState: DropdownDatePickerContainerState): void => {
+        // update the state with the value from the child component
+        setDropdownState(newState);
+        // attempt to create and update mendix with the new date
         if (
             newState.month !== -1 &&
             newState.day !== -1 &&
             newState.year !== -1 &&
             maxDaysInMonth(newState.month) >= newState.day
         ) {
-            //update mendix object
             const newDate = new Date();
-            //clear Time
+            // clear Time
             newDate.setMilliseconds(0);
             newDate.setSeconds(0);
             newDate.setMinutes(0);
             newDate.setHours(0);
 
-            console.log("newState", newState);
             newDate.setDate(newState.day);
             newDate.setMonth(newState.month);
             newDate.setFullYear(newState.year);
 
-            console.log("newDate", newDate);
-            this.props.date.setValue(newDate);
+            props.date.setValue(newDate);
         } else {
-            this.props.date.setValue(undefined);
+            // if not all of the dropdowns have been select, set the mendix value as empty
+            props.date.setValue(undefined);
         }
+    };
+
+    useEffect(() => {
+        // pass the props up to the state if the date changes inside mendix
+        setDropdownState({
+            month: props.useMonth
+                ? props.date.value !== undefined
+                    ? props.date.value.getMonth()
+                    : -1
+                : props.defaultMonth.value
+                ? parseFloat(props.defaultMonth.value.toFixed(0))
+                : 0,
+            day: props.useDay
+                ? props.date.value !== undefined
+                    ? props.date.value.getDate()
+                    : -1
+                : props.defaultDay.value
+                ? parseFloat(props.defaultDay.value.toFixed(0))
+                : 1,
+            year: props.useYear
+                ? props.date.value !== undefined
+                    ? props.date.value.getFullYear()
+                    : -1
+                : props.defaultYear.value
+                ? new Date().getFullYear() + parseFloat(props.defaultYear.value.toFixed(0))
+                : new Date().getFullYear()
+        });
+    }, [props.date]);
+    // Only render after the attributes are ready
+    if (
+        props.minYear.status === ValueStatus.Available &&
+        props.maxYear.status === ValueStatus.Available &&
+        props.date.status === ValueStatus.Available
+    ) {
+        console.log("state", dropdownState);
+        return (
+            <div
+                id={props.name}
+                className={props.class ? "widget-dropdowndatepicker " + props.class : "widget-dropdowndatepicker"}
+            >
+                {sortDropdowns()
+                    .sort((a, b) => a.sort - b.sort)
+                    .map(dropdown => {
+                        return dropdown.jsx;
+                    })}
+            </div>
+        );
+    } else {
+        return (
+            <div
+                id={props.name}
+                className={props.class ? "widget-dropdowndatepicker " + props.class : "widget-dropdowndatepicker"}
+            >
+                <span style={{ display: "none" }}>loading</span>
+            </div>
+        );
     }
-}
+};
+
+export default DropdownDatePicker;

@@ -1,6 +1,5 @@
 import { createElement } from "react";
 import { MonthTypeEnum } from "../../typings/DropdownDatePickerProps";
-import Select from 'react-select';
 
 export type monthDropdownProps = {
     month: number;
@@ -16,7 +15,7 @@ interface Month {
     full: string;
 }
 
-const months: Array<Month> = [
+const months: Month[] = [
     {
         num: "1",
         abbr: "Jan",
@@ -79,30 +78,43 @@ const months: Array<Month> = [
     }
 ];
 
-const MonthDropdown = (props: monthDropdownProps) => {
-    const handleSelect = (option: Month) => {
+const MonthDropdown = (props: monthDropdownProps): JSX.Element => {
+    const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>): void => {
         try {
-            props.setMonth(parseInt(option.num) - 1);
+            props.setMonth(parseInt(event.target.value, 10));
         } catch (e) {
             console.error(e);
         }
     };
 
-    const defaultMonth = { num: "-1", abbr: props.monthLabel, full: props.monthLabel};    
-    const displayMonths = [defaultMonth, ...months];
+    const renderOptions = (): JSX.Element[] => {
+        const options: JSX.Element[] = [];
+        for (let i = 0; i < 12; i++) {
+            options.push(
+                <option value={i} aria-selected={props.month === i} selected={props.month === i}>
+                    {months[i][props.monthType]}
+                </option>
+            );
+        }
+        return options;
+    };
 
     return (
         <div className="month-dropdown">
-            <Select<Month>
+            <select
                 className="form-control"
-                value={props.month === -1 ? defaultMonth : months[props.month]}
-                getOptionLabel={(month: Month) => month[props.monthType]}
-                getOptionValue={(month: Month) => month.num}
-                options={displayMonths}
+                value={props.month === -1 ? props.monthLabel : props.month}
                 onChange={handleSelect}
                 aria-haspopup="listbox"
-                isDisabled={props.disabled}
-            />
+                disabled={props.disabled}
+            >
+                <option value={-1} aria-selected={props.month === -1} selected={props.month === -1}>
+                    {props.monthLabel}
+                </option>
+                {renderOptions().map(option => {
+                    return option;
+                })}
+            </select>
         </div>
     );
 };

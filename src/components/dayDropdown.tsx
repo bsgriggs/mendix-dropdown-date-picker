@@ -1,4 +1,4 @@
-import React, { createElement, ReactElement } from "react";
+import React, { createElement } from "react";
 // import Select from 'react-select';
 
 export type dayDropdownProps = {
@@ -21,20 +21,12 @@ const isLeapYear = (year: number): boolean => {
     } else {
         return false;
     }
-}
+};
 
 export const maxDaysInMonth = (month: number): number => {
     if (month === -1) {
         return 0;
-    } else if (
-        month === 0 ||
-        month === 2 ||
-        month === 4 ||
-        month === 6 ||
-        month === 7 ||
-        month === 9 ||
-        month === 11
-    ) {
+    } else if (month === 0 || month === 2 || month === 4 || month === 6 || month === 7 || month === 9 || month === 11) {
         return 31;
     } else if (month === 3 || month === 5 || month === 8 || month === 10) {
         return 30;
@@ -43,18 +35,17 @@ export const maxDaysInMonth = (month: number): number => {
     }
 };
 
-
-const DayDropdown = (props: dayDropdownProps) => {
-    const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+const DayDropdown = (props: dayDropdownProps): JSX.Element => {
+    const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>): void => {
         try {
-            props.setDay(parseInt(event.target.value));
+            props.setDay(parseInt(event.target.value, 10));
         } catch (e) {
             console.error(e);
         }
     };
 
-    const renderOptions = () => {
-        const options: Array<ReactElement> = [];
+    const renderOptions = (): JSX.Element[] => {
+        const options: JSX.Element[] = [];
         for (let i = 1; i <= maxDaysInMonth(props.month); i++) {
             options.push(
                 <option value={i} aria-selected={props.day === i} selected={props.day === i}>

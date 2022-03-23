@@ -1,7 +1,7 @@
 ## DropdownDatePicker
-Datepicker with a dropdowns for Day, Month, and Year with dynamic selection.  
+Datepicker with dropdowns for Day, Month, and Year with dynamic selection.  
 *Note: This was built on Mendix version 9.6.2, but should work (in theory) on any Mendix 9 version*  
-![Demo](https://github.com/bsgriggs/dropdowndatepicker/blob/media/month_full.png) 
+![Demo](https://github.com/bsgriggs/dropdowndatepicker/blob/media/main.png) 
 
 ## Features
 - Ability to control the order of the dropdowns (i.e. month, day, year or day, month, year ...)
@@ -16,7 +16,7 @@ This section explains the effect of each setting for the widget.
   
 ### General
 ![General Settings](https://github.com/bsgriggs/dropdowndatepicker/blob/media/general_settings.png)  
-**Date -** The attribute that will get updated once the user has select ALL of the dropdowns. Deselected any dropdown will set the value as empty. For example, the user selects Sep 15th, 2015 then selects Year as the first value ("Year"), it will update the Mendix attribute as empty and clear the widget.  
+**Date -** The attribute that will get updated once the user has selected ALL of the dropdowns. Deselected any dropdown will set the value as empty. For example, the user selects Sep 15th, 2015 then selects Year as the first value ("Year"), it will update the Mendix attribute as empty and clear the widget.  
 **On change -** The action executed once the user has selected ALL the dropdowns.  
 **Label -** The standard Mendix label field. This will appear as a label for the group of dropdowns, not each indiviudal dropdown. (See the "Date" label in the first screenshot).  
 **Visible -** The standard Mendix visibility field.  
@@ -52,8 +52,16 @@ This section explains the effect of each setting for the widget.
 **Maximum Year -** An integer expression for the highest year value. Use **parseInteger(formatDateTime([%CurrentDateTime%], 'yyyy'))** for the current year.  
 **Year Sort -** The order of the year dropdown relative to the other dropdowns (sorting ascending).  
 **Default Year -** If "Use Year?" is set to "No", the widget will generate the date using this value. For example, "Use Year?" is set to "No" and "Default Year" is set to -3. When the user picks a date, it will set the date as 3 years back from the current date (i.e. 2022 -> 2019).  
-
-## Setup
+**Sort Years Ascending -** The sorting direction of the years in the dropdown. "Yes" = 2019, 2020, 2021. "No" = 2021, 2020, 2019.  
+  
+## Setup  
+1. In the General tab, select the date attribute that you want the user to select.  
+2. Set "Show label" to "Yes" and type the name of the attribute the user is entering (i.e. Birth Date).  
+3. Decide which dropdown you want the user to select and turn OFF any you do not want them to select.  
+4. Decide the order you want the dropdowns to display and change the "Day Sort", "Month Sort", and "Year Sort" accordingly (i.e. Month, Day, Year would be Month Sort = 1, Day Sort = 2, and Year Sort = 3).  
+5. Decide on the format for the Days and Months and change the "Day Display" and "Month Display" accordingly.  
+6. In the Year Settings tab, decide on the range of years you want to be selectable and set the "Minimum Year" and "Maximum Year" as an expression of [%CurrentDateTime%] (this way the dropdown will automatically get new values each year). For example, use parseInteger(formatDateTime([%CurrentDateTime%], 'yyyy')) - 100 for 100 years ago.  
+7. Also in the Year Settings, decide on the order you want the years to display by setting "Sort Years Ascending?". "Yes" = 2019, 2020, 2021. "No" = 2021, 2020, 2019.
 
 ## Demo project
 https://dropdowndatepicker-sandbox.mxapps.io/

@@ -34,6 +34,7 @@ export interface DropdownDatePickerContainerProps {
     yearLabel: string;
     minYear: DynamicValue<BigJs.Big>;
     maxYear: DynamicValue<BigJs.Big>;
+    sortYearsAsc: boolean;
 }
 
 export interface DropdownDatePickerPreviewProps {
@@ -57,4 +58,5 @@ export interface DropdownDatePickerPreviewProps {
     yearLabel: string;
     minYear: string;
     maxYear: string;
+    sortYearsAsc: boolean;
 }

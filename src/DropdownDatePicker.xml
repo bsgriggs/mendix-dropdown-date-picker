@@ -110,6 +110,10 @@
                 <description></description>
                 <returnType type="Integer" />
             </property>
+            <property key="sortYearsAsc" type="boolean" defaultValue="false">
+                <caption>Sort Years Ascending?</caption>
+                <description>The order of the selectable years (Yes = 2019, 2020, 2021 ... No = 2021, 2020, 2019)</description>
+            </property>
         </propertyGroup>
     </properties>
 </widget>

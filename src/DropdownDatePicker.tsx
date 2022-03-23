@@ -74,6 +74,7 @@ const DropdownDatePicker = (props: DropdownDatePickerContainerProps): JSX.Elemen
                             year={dropdownState.year}
                             minYear={parseFloat(props.minYear.value.toFixed(0))}
                             maxYear={parseFloat(props.maxYear.value.toFixed(0))}
+                            sortYearsAsc={props.sortYearsAsc}
                             yearLabel={props.yearLabel}
                             setYear={(newYear: number) => handleChange({ ...dropdownState, year: newYear })}
                             disabled={props.date.readOnly}

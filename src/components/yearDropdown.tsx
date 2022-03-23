@@ -5,6 +5,7 @@ export type yearDropdownProps = {
     yearLabel: string;
     minYear: number;
     maxYear: number;
+    sortYearsAsc: boolean;
     setYear: (newYear: number) => void;
     disabled: boolean;
 };
@@ -20,14 +21,18 @@ const YearDropdown = (props: yearDropdownProps): JSX.Element => {
 
     const renderOptions = (): JSX.Element[] => {
         const options: JSX.Element[] = [];
-        if (props.disabled && props.year !== -1){
+        if (props.disabled && props.year !== -1) {
             options.push(
                 <option value={props.year} aria-selected="true">
                     {props.year}
                 </option>
-            );   
-        } else{
-            for (let i: number = props.maxYear; i >= props.minYear; i--) {
+            );
+        } else {
+            for (
+                let i: number = props.sortYearsAsc ? props.minYear : props.maxYear;
+                props.sortYearsAsc ? i <= props.maxYear : i >= props.minYear;
+                props.sortYearsAsc ? i++ : i--
+            ) {
                 options.push(
                     <option value={i} aria-selected={props.year === i} selected={props.year === i}>
                         {i}

@@ -65,8 +65,8 @@ const DayDropdown = (props: dayDropdownProps): JSX.Element => {
         if (props.disabled && props.day !== -1) {
             options.push(
                 <option value={props.day} aria-selected="true">
-                    {props.dayType === "num" && <React.Fragment>{props.day}</React.Fragment>}
-                    {props.dayType === "withSuffix" && <React.Fragment>{numberSuffix(props.day)}</React.Fragment>}
+                    {props.dayType === "num" && props.day}
+                    {props.dayType === "withSuffix" && numberSuffix(props.day)}
                 </option>
             );
         } else {

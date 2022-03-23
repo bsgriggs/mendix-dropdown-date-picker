@@ -72,6 +72,14 @@
                 <caption>Day Placeholder</caption>
                 <description></description>
             </property>
+            <property key="dayType" type="enumeration" defaultValue="num">
+                <caption>Day Display</caption>
+                <description>Which values to display in the day dropdown (9, 9th)</description>
+                <enumerationValues>
+                    <enumerationValue key="num">Number</enumerationValue>
+                    <enumerationValue key="withSuffix">With Suffix</enumerationValue>
+                </enumerationValues>
+            </property>
         </propertyGroup>
         <propertyGroup caption="Year Settings">
             <property key="useYear" type="boolean" defaultValue="true">

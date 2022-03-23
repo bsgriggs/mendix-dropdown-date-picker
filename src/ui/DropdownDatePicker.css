@@ -1,19 +1,15 @@
 .widget-dropdowndatepicker {
+    width: fit-content;
+}
+
+.widget-dropdowndatepicker .dropdowns{
     display: flex;
 }
 
-.widget-dropdowndatepicker >div:not(:last-child){
-    margin-right: 1em;
+.widget-dropdowndatepicker .dropdowns >div:not(:last-child){
+    margin-right: 8px;
 }
-
-.widget-dropdowndatepicker .day-dropdown{
-    /* margin-right: 1em; */
-}
-
-.widget-dropdowndatepicker .month-dropdown{
-    /* margin-right: 1em; */
-}
-
-.widget-dropdowndatepicker .year-dropdown{
-    /* margin-right: 1em; */
-}
+.widget-dropdowndatepicker+.alert{
+    /* width: 23.9rem;
+    max-width: 100%; */
+};

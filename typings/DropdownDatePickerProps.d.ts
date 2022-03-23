@@ -8,6 +8,8 @@ import { ActionValue, DynamicValue, EditableValue } from "mendix";
 
 export type MonthTypeEnum = "num" | "abbr" | "full";
 
+export type DayTypeEnum = "num" | "withSuffix";
+
 export interface DropdownDatePickerContainerProps {
     name: string;
     class: string;
@@ -25,6 +27,7 @@ export interface DropdownDatePickerContainerProps {
     defaultDay: DynamicValue<BigJs.Big>;
     daySort: DynamicValue<BigJs.Big>;
     dayLabel: string;
+    dayType: DayTypeEnum;
     useYear: boolean;
     defaultYear: DynamicValue<BigJs.Big>;
     yearSort: DynamicValue<BigJs.Big>;
@@ -47,6 +50,7 @@ export interface DropdownDatePickerPreviewProps {
     defaultDay: string;
     daySort: string;
     dayLabel: string;
+    dayType: DayTypeEnum;
     useYear: boolean;
     defaultYear: string;
     yearSort: string;

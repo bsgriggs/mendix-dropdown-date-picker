@@ -4,6 +4,7 @@ import MonthDropdown from "./components/monthDropdown";
 import YearDropdown from "./components/yearDropdown";
 import { DropdownDatePickerContainerProps } from "../typings/DropdownDatePickerProps";
 import { ValueStatus } from "mendix";
+import Alert from "./components/alert";
 
 import "./ui/DropdownDatePicker.css";
 
@@ -56,6 +57,7 @@ const DropdownDatePicker = (props: DropdownDatePickerContainerProps): JSX.Elemen
                         <DayDropdown
                             dayLabel={props.dayLabel}
                             setDay={(newDay: number) => handleChange({ ...dropdownState, day: newDay })}
+                            dayType={props.dayType}
                             month={dropdownState.month}
                             day={dropdownState.day}
                             year={dropdownState.year}
@@ -91,7 +93,7 @@ const DropdownDatePicker = (props: DropdownDatePickerContainerProps): JSX.Elemen
             newState.month !== -1 &&
             newState.day !== -1 &&
             newState.year !== -1 &&
-            maxDaysInMonth(newState.month) >= newState.day
+            maxDaysInMonth(newState.month, newState.year) >= newState.day
         ) {
             const newDate = new Date();
             // clear Time
@@ -100,9 +102,9 @@ const DropdownDatePicker = (props: DropdownDatePickerContainerProps): JSX.Elemen
             newDate.setMinutes(0);
             newDate.setHours(0);
 
-            newDate.setDate(newState.day);
-            newDate.setMonth(newState.month);
             newDate.setFullYear(newState.year);
+            newDate.setMonth(newState.month);
+            newDate.setDate(newState.day);
 
             props.date.setValue(newDate);
         } else {
@@ -143,17 +145,19 @@ const DropdownDatePicker = (props: DropdownDatePickerContainerProps): JSX.Elemen
         props.maxYear.status === ValueStatus.Available &&
         props.date.status === ValueStatus.Available
     ) {
-        console.log("state", dropdownState);
         return (
             <div
                 id={props.name}
                 className={props.class ? "widget-dropdowndatepicker " + props.class : "widget-dropdowndatepicker"}
             >
-                {sortDropdowns()
-                    .sort((a, b) => a.sort - b.sort)
-                    .map(dropdown => {
-                        return dropdown.jsx;
-                    })}
+                <div className="dropdowns">
+                    {sortDropdowns()
+                        .sort((a, b) => a.sort - b.sort)
+                        .map(dropdown => {
+                            return dropdown.jsx;
+                        })}
+                </div>
+                {props.date.validation && <Alert id={props.name + "-error"}>{props.date.validation}</Alert>}
             </div>
         );
     } else {

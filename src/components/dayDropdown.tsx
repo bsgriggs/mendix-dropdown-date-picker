@@ -46,13 +46,22 @@ const DayDropdown = (props: dayDropdownProps): JSX.Element => {
 
     const renderOptions = (): JSX.Element[] => {
         const options: JSX.Element[] = [];
-        for (let i = 1; i <= maxDaysInMonth(props.month); i++) {
+        if (props.disabled && props.day !== -1){
             options.push(
-                <option value={i} aria-selected={props.day === i} selected={props.day === i}>
-                    {i}
+                <option value={props.day} aria-selected="true">
+                    {props.day}
                 </option>
-            );
+            );   
+        } else{
+            for (let i = 1; i <= maxDaysInMonth(props.month); i++) {
+                options.push(
+                    <option value={i} aria-selected={props.day === i}>
+                        {i}
+                    </option>
+                );
+            }
         }
+
         return options;
     };
 
@@ -65,7 +74,7 @@ const DayDropdown = (props: dayDropdownProps): JSX.Element => {
                 onChange={handleSelect}
                 aria-haspopup="listbox"
             >
-                <option value={-1} aria-selected={props.day === -1} selected={props.day === -1}>
+                <option value={-1} aria-selected={props.day === -1} >
                     {props.dayLabel}
                 </option>
                 {renderOptions().map(option => {

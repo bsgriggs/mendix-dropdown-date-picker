@@ -89,12 +89,20 @@ const MonthDropdown = (props: monthDropdownProps): JSX.Element => {
 
     const renderOptions = (): JSX.Element[] => {
         const options: JSX.Element[] = [];
-        for (let i = 0; i < 12; i++) {
+        if (props.disabled && props.month !== -1){
             options.push(
-                <option value={i} aria-selected={props.month === i} selected={props.month === i}>
-                    {months[i][props.monthType]}
+                <option value={props.month} aria-selected="true">
+                    {months[props.month][props.monthType]}
                 </option>
-            );
+            );   
+        } else{
+            for (let i = 0; i < 12; i++) {
+                options.push(
+                    <option value={i} aria-selected={props.month === i} selected={props.month === i}>
+                        {months[i][props.monthType]}
+                    </option>
+                );
+            }
         }
         return options;
     };

@@ -21,12 +21,20 @@ const YearDropdown = (props: yearDropdownProps): JSX.Element => {
 
     const renderOptions = (): JSX.Element[] => {
         const options: JSX.Element[] = [];
-        for (let i: number = props.maxYear; i >= props.minYear; i--) {
+        if (props.disabled && props.year !== -1){
             options.push(
-                <option value={i} aria-selected={props.year === i} selected={props.year === i}>
-                    {i}
+                <option value={props.year} aria-selected="true">
+                    {props.year}
                 </option>
-            );
+            );   
+        } else{
+            for (let i: number = props.maxYear; i >= props.minYear; i--) {
+                options.push(
+                    <option value={i} aria-selected={props.year === i} selected={props.year === i}>
+                        {i}
+                    </option>
+                );
+            }
         }
         return options;
     };

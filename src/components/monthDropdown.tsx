@@ -19,7 +19,7 @@ const months: Month[] = [
     {
         num: "1",
         abbr: "Jan",
-        full: "Janruary"
+        full: "January"
     },
     {
         num: "2",

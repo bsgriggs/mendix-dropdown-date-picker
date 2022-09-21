@@ -19,7 +19,7 @@ type dropdown = {
     jsx: JSX.Element;
 };
 
-const DropdownDatePicker = (props: DropdownDatePickerContainerProps): JSX.Element => {
+const DropdownDatePicker = (props: DropdownDatePickerContainerProps): JSX.Element => { 
     // set state default values, -1 shows the select's label
     const [dropdownState, setDropdownState] = useState<DropdownDatePickerContainerState>({
         month: -1,
@@ -149,7 +149,7 @@ const DropdownDatePicker = (props: DropdownDatePickerContainerProps): JSX.Elemen
         return (
             <div
                 id={props.name}
-                className={props.class ? "widget-dropdowndatepicker " + props.class : "widget-dropdowndatepicker"}
+                className="widget-dropdowndatepicker"
             >
                 <div className="dropdowns">
                     {sortDropdowns()
@@ -165,7 +165,7 @@ const DropdownDatePicker = (props: DropdownDatePickerContainerProps): JSX.Elemen
         return (
             <div
                 id={props.name}
-                className={props.class ? "widget-dropdowndatepicker " + props.class : "widget-dropdowndatepicker"}
+                className="widget-dropdowndatepicker"
             >
                 <span style={{ display: "none" }}>loading</span>
             </div>

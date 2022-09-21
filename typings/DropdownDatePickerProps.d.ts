@@ -3,8 +3,8 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { CSSProperties } from "react";
-import { ActionValue, DynamicValue, EditableValue } from "mendix";
+import { DynamicValue, EditableValue } from "mendix";
+import { Big } from "big.js";
 
 export type MonthTypeEnum = "num" | "abbr" | "full";
 
@@ -12,34 +12,30 @@ export type DayTypeEnum = "num" | "withSuffix";
 
 export interface DropdownDatePickerContainerProps {
     name: string;
-    class: string;
-    style?: CSSProperties;
     tabIndex?: number;
     id: string;
     date: EditableValue<Date>;
-    onDateChange?: ActionValue;
     useMonth: boolean;
-    defaultMonth: DynamicValue<BigJs.Big>;
-    monthSort: DynamicValue<BigJs.Big>;
+    defaultMonth: DynamicValue<Big>;
+    monthSort: DynamicValue<Big>;
     monthLabel: string;
     monthType: MonthTypeEnum;
     useDay: boolean;
-    defaultDay: DynamicValue<BigJs.Big>;
-    daySort: DynamicValue<BigJs.Big>;
+    defaultDay: DynamicValue<Big>;
+    daySort: DynamicValue<Big>;
     dayLabel: string;
     dayType: DayTypeEnum;
     useYear: boolean;
-    defaultYear: DynamicValue<BigJs.Big>;
-    yearSort: DynamicValue<BigJs.Big>;
+    defaultYear: DynamicValue<Big>;
+    yearSort: DynamicValue<Big>;
     yearLabel: string;
-    minYear: DynamicValue<BigJs.Big>;
-    maxYear: DynamicValue<BigJs.Big>;
+    minYear: DynamicValue<Big>;
+    maxYear: DynamicValue<Big>;
     sortYearsAsc: boolean;
 }
 
 export interface DropdownDatePickerPreviewProps {
-    class: string;
-    style: string;
+    readOnly: boolean;
     date: string;
     onDateChange: {} | null;
     useMonth: boolean;

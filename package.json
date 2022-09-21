@@ -1,7 +1,7 @@
 {
   "name": "dropdowndatepicker",
   "widgetName": "DropdownDatePicker",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Datepicker with a dropdowns for Day, Month, and Year with dynamic selection",
   "copyright": "Benjamin Griggs",
   "author": "Benjamin Griggs",
@@ -22,13 +22,10 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^8.14.0",
+    "@mendix/pluggable-widgets-tools": "^9.0.0",
     "@types/big.js": "^4.0.5",
-    "@types/classnames": "^2.2.4",
     "@types/react": "~16.9.0",
     "@types/react-dom": "~16.9.0"
   },
-  "dependencies": {
-    "classnames": "^2.2.6"
-  }
+  "dependencies": {}
 }

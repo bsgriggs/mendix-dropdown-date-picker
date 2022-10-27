@@ -1,5 +1,4 @@
-import { FunctionComponent, createElement } from "react";
-import classNames from "classnames";
+import { FunctionComponent, createElement, ReactElement } from "react";
 
 export interface AlertProps {
     id?: string;
@@ -7,11 +6,11 @@ export interface AlertProps {
     className?: string;
 }
 
-const Alert: FunctionComponent<AlertProps> = ({ alertStyle, className, children, id }):JSX.Element =>{
+const Alert: FunctionComponent<AlertProps> = ({ alertStyle, className, children, id }):ReactElement =>{
     Alert.displayName = "Alert";
     Alert.defaultProps = { alertStyle: "danger" };
     return (
-            <div id={id} className={classNames(`alert alert-${alertStyle} mx-validation-message`, className)}>
+            <div id={id} className={`alert alert-${alertStyle} mx-validation-message ${className}`}>
                 {children}
             </div>
     )

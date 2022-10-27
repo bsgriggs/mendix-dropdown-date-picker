@@ -1,4 +1,4 @@
-import { createElement, useState, useEffect } from "react";
+import { createElement, useState, useEffect, ReactElement } from "react";
 import DayDropdown, { maxDaysInMonth } from "./components/dayDropdown";
 import MonthDropdown from "./components/monthDropdown";
 import YearDropdown from "./components/yearDropdown";
@@ -16,10 +16,10 @@ type DropdownDatePickerContainerState = {
 
 type dropdown = {
     sort: number;
-    jsx: JSX.Element;
+    element: ReactElement;
 };
 
-const DropdownDatePicker = (props: DropdownDatePickerContainerProps): JSX.Element => { 
+const DropdownDatePicker = (props: DropdownDatePickerContainerProps): ReactElement => { 
     // set state default values, -1 shows the select's label
     const [dropdownState, setDropdownState] = useState<DropdownDatePickerContainerState>({
         month: -1,
@@ -39,11 +39,11 @@ const DropdownDatePicker = (props: DropdownDatePickerContainerProps): JSX.Elemen
             if (props.useMonth) {
                 dropdowns.push({
                     sort: parseFloat(props.monthSort.value.toFixed(0)),
-                    jsx: (
+                    element: (
                         <MonthDropdown
                             month={dropdownState.month}
                             monthType={props.monthType}
-                            monthLabel={props.monthLabel}
+                            monthLabel={props.monthLabel.value as string}
                             setMonth={(newMonth: number) => handleChange({ ...dropdownState, month: newMonth })}
                             disabled={props.date.readOnly}
                         />
@@ -53,9 +53,9 @@ const DropdownDatePicker = (props: DropdownDatePickerContainerProps): JSX.Elemen
             if (props.useDay) {
                 dropdowns.push({
                     sort: parseFloat(props.daySort.value.toFixed(0)),
-                    jsx: (
+                    element: (
                         <DayDropdown
-                            dayLabel={props.dayLabel}
+                            dayLabel={props.dayLabel.value as string}
                             setDay={(newDay: number) => handleChange({ ...dropdownState, day: newDay })}
                             dayType={props.dayType}
                             month={dropdownState.month}
@@ -69,13 +69,13 @@ const DropdownDatePicker = (props: DropdownDatePickerContainerProps): JSX.Elemen
             if (props.useYear) {
                 dropdowns.push({
                     sort: parseFloat(props.yearSort.value.toFixed(0)),
-                    jsx: (
+                    element: (
                         <YearDropdown
                             year={dropdownState.year}
                             minYear={parseFloat(props.minYear.value.toFixed(0))}
                             maxYear={parseFloat(props.maxYear.value.toFixed(0))}
                             sortYearsAsc={props.sortYearsAsc}
-                            yearLabel={props.yearLabel}
+                            yearLabel={props.yearLabel.value as string}
                             setYear={(newYear: number) => handleChange({ ...dropdownState, year: newYear })}
                             disabled={props.date.readOnly}
                         />
@@ -140,6 +140,10 @@ const DropdownDatePicker = (props: DropdownDatePickerContainerProps): JSX.Elemen
                 : new Date().getFullYear()
         });
     }, [props.date]);
+
+    console.log("props.date", props.date);
+    console.log("dropdown state",dropdownState)
+
     // Only render after the attributes are ready
     if (
         props.minYear.status === ValueStatus.Available &&
@@ -155,7 +159,7 @@ const DropdownDatePicker = (props: DropdownDatePickerContainerProps): JSX.Elemen
                     {sortDropdowns()
                         .sort((a, b) => a.sort - b.sort)
                         .map(dropdown => {
-                            return dropdown.jsx;
+                            return dropdown.element;
                         })}
                 </div>
                 {props.date.validation && <Alert id={props.name + "-error"}>{props.date.validation}</Alert>}

@@ -39,9 +39,12 @@
                 <description>Used to determine the order Month appears relative to Day and Year</description>
                 <returnType type="Integer" />
             </property>
-            <property key="monthLabel" type="string" defaultValue="Month">
+            <property key="monthLabel" type="textTemplate">
                 <caption>Month Placeholder</caption>
                 <description></description>
+                <translations>
+                    <translation lang="en_US">Month</translation>
+                </translations>
             </property>
             <property key="monthType" type="enumeration" defaultValue="num">
                 <caption>Month Display</caption>
@@ -68,9 +71,12 @@
                 <description>Used to determine the order Day appears relative to Month and Year</description>
                 <returnType type="Integer" />
             </property>
-            <property key="dayLabel" type="string" defaultValue="Day">
+            <property key="dayLabel" type="textTemplate">
                 <caption>Day Placeholder</caption>
                 <description></description>
+                <translations>
+                    <translation lang="en_US">Day</translation>
+                </translations>
             </property>
             <property key="dayType" type="enumeration" defaultValue="num">
                 <caption>Day Display</caption>
@@ -96,9 +102,12 @@
                 <description>Used to determine the order Year appears relative to Month and Day</description>
                 <returnType type="Integer" />
             </property>
-            <property key="yearLabel" type="string" defaultValue="Year">
+            <property key="yearLabel" type="textTemplate">
                 <caption>Year Placeholder</caption>
                 <description></description>
+                <translations>
+                    <translation lang="en_US">Year</translation>
+                </translations>
             </property>
             <property key="minYear" type="expression" required="true" defaultValue="1922">
                 <caption>Minimum Year</caption>

@@ -1,4 +1,4 @@
-import React, { createElement } from "react";
+import React, { createElement, ReactElement } from "react";
 import { DayTypeEnum } from "../../typings/DropdownDatePickerProps";
 
 export type dayDropdownProps = {
@@ -51,7 +51,7 @@ export const maxDaysInMonth = (month: number, year: number): number => {
     }
 };
 
-const DayDropdown = (props: dayDropdownProps): JSX.Element => {
+const DayDropdown = (props: dayDropdownProps): ReactElement => {
     const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>): void => {
         try {
             props.setDay(parseInt(event.target.value, 10));
@@ -60,8 +60,8 @@ const DayDropdown = (props: dayDropdownProps): JSX.Element => {
         }
     };
 
-    const renderOptions = (): JSX.Element[] => {
-        const options: JSX.Element[] = [];
+    const renderOptions = (): ReactElement[] => {
+        const options: ReactElement[] = [];
         if (props.disabled && props.day !== -1) {
             options.push(
                 <option value={props.day} aria-selected="true">

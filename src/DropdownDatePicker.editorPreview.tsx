@@ -1,7 +1,9 @@
 import { ReactElement, createElement } from "react";
 import { DropdownDatePickerPreviewProps } from "../typings/DropdownDatePickerProps";
+import { WebIcon } from "mendix";
 import DayDropdown from "./components/dayDropdown";
 import MonthDropdown from "./components/monthDropdown";
+import MxIcon from "./components/MxIcon";
 import YearDropdown from "./components/yearDropdown";
 
 export function preview(props: DropdownDatePickerPreviewProps): ReactElement {
@@ -73,6 +75,20 @@ export function preview(props: DropdownDatePickerPreviewProps): ReactElement {
                         setYear={() => {}}
                         disabled={props.readOnly}
                     />
+                )
+            });
+        }
+        if (props.showClearBtn) {
+            dropdowns.push({
+                sort: 10,
+                element: (
+                    <button className="btn btn-sm mx-button btn-default">
+                        <MxIcon
+                            defaultClassname="remove"
+                            title={props.clearBtnTooltip}
+                            mxIconOverride={props.clearBtnIcon?.type ? props.clearBtnIcon as WebIcon : undefined}
+                        />
+                    </button>
                 )
             });
         }

@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { DynamicValue, EditableValue } from "mendix";
+import { DynamicValue, EditableValue, WebIcon } from "mendix";
 import { Big } from "big.js";
 
 export type MonthTypeEnum = "num" | "abbr" | "full";
@@ -15,6 +15,9 @@ export interface DropdownDatePickerContainerProps {
     tabIndex?: number;
     id: string;
     date: EditableValue<Date>;
+    showClearBtn: boolean;
+    clearBtnIcon?: DynamicValue<WebIcon>;
+    clearBtnTooltip: DynamicValue<string>;
     useMonth: boolean;
     defaultMonth: DynamicValue<Big>;
     monthSort: DynamicValue<Big>;
@@ -38,6 +41,9 @@ export interface DropdownDatePickerPreviewProps {
     readOnly: boolean;
     date: string;
     onDateChange: {} | null;
+    showClearBtn: boolean;
+    clearBtnIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    clearBtnTooltip: string;
     useMonth: boolean;
     defaultMonth: string;
     monthSort: string;

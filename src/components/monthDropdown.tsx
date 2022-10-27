@@ -1,4 +1,4 @@
-import { createElement, ReactElement } from "react";
+import { createElement, ReactElement, ChangeEvent } from "react";
 import { MonthTypeEnum } from "../../typings/DropdownDatePickerProps";
 
 export type monthDropdownProps = {
@@ -79,7 +79,7 @@ const months: Month[] = [
 ];
 
 const MonthDropdown = (props: monthDropdownProps): ReactElement => {
-    const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>): void => {
+    const handleSelect = (event: ChangeEvent<HTMLSelectElement>): void => {
         try {
             props.setMonth(parseInt(event.target.value, 10));
         } catch (e) {
@@ -89,13 +89,13 @@ const MonthDropdown = (props: monthDropdownProps): ReactElement => {
 
     const renderOptions = (): ReactElement[] => {
         const options: ReactElement[] = [];
-        if (props.disabled && props.month !== -1){
+        if (props.disabled && props.month !== -1) {
             options.push(
                 <option value={props.month} aria-selected="true">
                     {months[props.month][props.monthType]}
                 </option>
-            );   
-        } else{
+            );
+        } else {
             for (let i = 0; i < 12; i++) {
                 options.push(
                     <option value={i} aria-selected={props.month === i} selected={props.month === i}>

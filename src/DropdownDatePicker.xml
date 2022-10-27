@@ -17,6 +17,21 @@
                 <caption>On change</caption>
                 <description>Action excuted after ALL dropdowns are selected</description>
             </property>
+            <property key="showClearBtn" type="boolean" defaultValue="true">
+                <caption>Show Clear Button?</caption>
+                <description></description>
+            </property>
+            <property key="clearBtnIcon" type="icon" required="false">
+                <caption>Clear Button Icon</caption>
+                <description></description>
+            </property>
+            <property key="clearBtnTooltip" type="textTemplate" >
+                <caption>Clear Button Tooltip</caption>
+                <description>Text shown when hovering on the Clear Button</description>
+                <translations>
+                    <translation lang="en_US">Clear Date</translation>
+                </translations>
+            </property>
             <systemProperty key="Visibility" />
             <systemProperty key="Editability" />
         </propertyGroup>

@@ -33,20 +33,23 @@ type ObjectProperties = {
 };
 
 export function getProperties(_values: DropdownDatePickerPreviewProps, defaultProperties: Properties): Properties {
-    if (_values.useDay === true) {
+    if (_values.useDay) {
         hidePropertiesIn(defaultProperties, _values, ["defaultDay"]);
     } else {
         hidePropertiesIn(defaultProperties, _values, ["daySort", "dayLabel", "dayType"]);
     }
-    if (_values.useMonth === true) {
+    if (_values.useMonth) {
         hidePropertiesIn(defaultProperties, _values, ["defaultMonth"]);
     } else {
         hidePropertiesIn(defaultProperties, _values, ["monthSort", "monthLabel", "monthType"]);
     }
-    if (_values.useYear === true) {
+    if (_values.useYear) {
         hidePropertiesIn(defaultProperties, _values, ["defaultYear"]);
     } else {
         hidePropertiesIn(defaultProperties, _values, ["minYear", "maxYear", "sortYearsAsc", "yearSort", "yearLabel"]);
+    }
+    if(!_values.showClearBtn) {
+        hidePropertiesIn(defaultProperties, _values, ["clearBtnIcon", "clearBtnTooltip"]);
     }
     return defaultProperties;
 }

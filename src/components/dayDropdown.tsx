@@ -25,15 +25,15 @@ const isLeapYear = (year: number): boolean => {
 };
 
 export const numberSuffix = (n: number): string => {
-    var j = n % 10,
-        k = n % 100;
-    if (j == 1 && k != 11) {
+    const j = n % 10;
+    const k = n % 100;
+    if (j === 1 && k !== 11) {
         return n + "st";
     }
-    if (j == 2 && k != 12) {
+    if (j === 2 && k !== 12) {
         return n + "nd";
     }
-    if (j == 3 && k != 13) {
+    if (j === 3 && k !== 13) {
         return n + "rd";
     }
     return n + "th";
@@ -70,7 +70,7 @@ const DayDropdown = (props: dayDropdownProps): ReactElement => {
                 </option>
             );
         } else {
-            for (let i: number = 1; i <= maxDaysInMonth(props.month, props.year); i++) {
+            for (let i = 1; i <= maxDaysInMonth(props.month, props.year); i++) {
                 options.push(
                     <option value={i} aria-selected={props.day === i}>
                         {props.dayType === "num" && i}

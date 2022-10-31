@@ -127,6 +127,7 @@ const DropdownDatePicker = ({
     };
 
     const handleChange = (newState: DropdownDatePickerContainerState): void => {
+        console.info("handle change",{newState, dropdownState});
         // update the state with the value from the child component
         setDropdownState(newState);
         // attempt to create and update mendix with the new date
@@ -143,10 +144,10 @@ const DropdownDatePicker = ({
             newDate.setMinutes(0);
             newDate.setHours(0);
 
-            newDate.setFullYear(newState.year);
-            newDate.setMonth(newState.month);
             newDate.setDate(newState.day);
-
+            newDate.setMonth(newState.month);
+            newDate.setFullYear(newState.year);
+            //send new date to Mendix
             date.setValue(newDate);
         } else {
             // if not all of the dropdowns have been select, set the mendix value as empty
@@ -192,9 +193,6 @@ const DropdownDatePicker = ({
         useMonth,
         useYear
     ]);
-
-    console.log("date", date.value);
-    console.log("dropdown state", { ...dropdownState });
 
     // Only render after the attributes are ready
     if (

@@ -42,7 +42,7 @@ export interface DropdownDatePickerPreviewProps {
     date: string;
     onDateChange: {} | null;
     showClearBtn: boolean;
-    clearBtnIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
+    clearBtnIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
     clearBtnTooltip: string;
     useMonth: boolean;
     defaultMonth: string;

@@ -127,7 +127,6 @@ const DropdownDatePicker = ({
     };
 
     const handleChange = (newState: DropdownDatePickerContainerState): void => {
-        console.info("handle change", { newState, dropdownState });
         // update the state with the value from the child component
         setDropdownState(newState);
         // attempt to create and update mendix with the new date

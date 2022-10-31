@@ -86,7 +86,7 @@ export function preview(props: DropdownDatePickerPreviewProps): ReactElement {
                         <MxIcon
                             defaultClassname="remove"
                             title={props.clearBtnTooltip}
-                            mxIconOverride={props.clearBtnIcon?.type ? props.clearBtnIcon as WebIcon : undefined}
+                            mxIconOverride={props.clearBtnIcon?.type ? (props.clearBtnIcon as WebIcon) : undefined}
                         />
                     </button>
                 )

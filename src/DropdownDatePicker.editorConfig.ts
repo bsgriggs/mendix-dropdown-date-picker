@@ -48,7 +48,7 @@ export function getProperties(_values: DropdownDatePickerPreviewProps, defaultPr
     } else {
         hidePropertiesIn(defaultProperties, _values, ["minYear", "maxYear", "sortYearsAsc", "yearSort", "yearLabel"]);
     }
-    if(!_values.showClearBtn) {
+    if (!_values.showClearBtn) {
         hidePropertiesIn(defaultProperties, _values, ["clearBtnIcon", "clearBtnTooltip"]);
     }
     return defaultProperties;

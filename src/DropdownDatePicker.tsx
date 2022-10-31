@@ -113,12 +113,12 @@ const DropdownDatePicker = ({
                     sort: 10,
                     element: (
                         <button className="btn mx-button btn-sm btn-default" onClick={handleClear}>
-                        <MxIcon
-                            defaultClassname="remove"
-                            title={clearBtnTooltip.value as string}
-                            mxIconOverride={clearBtnIcon?.value}
-                        />
-                    </button>
+                            <MxIcon
+                                defaultClassname="remove"
+                                title={clearBtnTooltip.value as string}
+                                mxIconOverride={clearBtnIcon?.value}
+                            />
+                        </button>
                     )
                 });
             }
@@ -127,7 +127,7 @@ const DropdownDatePicker = ({
     };
 
     const handleChange = (newState: DropdownDatePickerContainerState): void => {
-        console.info("handle change",{newState, dropdownState});
+        console.info("handle change", { newState, dropdownState });
         // update the state with the value from the child component
         setDropdownState(newState);
         // attempt to create and update mendix with the new date
@@ -147,7 +147,7 @@ const DropdownDatePicker = ({
             newDate.setDate(newState.day);
             newDate.setMonth(newState.month);
             newDate.setFullYear(newState.year);
-            //send new date to Mendix
+            // send new date to Mendix
             date.setValue(newDate);
         } else {
             // if not all of the dropdowns have been select, set the mendix value as empty
@@ -155,10 +155,10 @@ const DropdownDatePicker = ({
         }
     };
 
-    const handleClear = () => {
+    const handleClear = (): void => {
         setDropdownState(emptyDropdownState);
         date.setValue(undefined);
-    }
+    };
 
     useEffect(() => {
         // pass the props up to the state if the date changes inside mendix

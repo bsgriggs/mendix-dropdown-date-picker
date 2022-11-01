@@ -64,7 +64,7 @@ This section explains the effect of each setting for the widget.
 7. Also in the Year Settings, decide on the order you want the years to display by setting "Sort Years Ascending?". "Yes" = 2019, 2020, 2021. "No" = 2021, 2020, 2019.
 
 ## Demo project
-https://dropdowndatepicker-sandbox.mxapps.io/
+https://widgettesting105-sandbox.mxapps.io/p/dropdown-date-picker
 
 ## Issues, suggestions and feature requests
 https://github.com/bsgriggs/DropdownDatePicker/issues

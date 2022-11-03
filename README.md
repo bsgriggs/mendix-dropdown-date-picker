@@ -1,5 +1,5 @@
 ## DropdownDatePicker
-Datepicker with dropdowns for Day, Month, and Year with dynamic selection.  
+Date picker with drop downs for Day, Month, and Year with dynamic selection.  
 *Note: This was built on Mendix version 9.6.2, but should work (in theory) on any Mendix 9 version*  
 ![Demo](https://github.com/bsgriggs/dropdowndatepicker/blob/media/main.png) 
 

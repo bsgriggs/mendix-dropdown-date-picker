@@ -51,6 +51,7 @@ export function getProperties(_values: DropdownDatePickerPreviewProps, defaultPr
     if (!_values.showClearBtn) {
         hidePropertiesIn(defaultProperties, _values, ["clearBtnIcon", "clearBtnTooltip"]);
     }
+
     return defaultProperties;
 }
 

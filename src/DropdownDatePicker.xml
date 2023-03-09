@@ -70,6 +70,7 @@
                     <enumerationValue key="full">Full Word</enumerationValue>
                 </enumerationValues>
             </property>
+            
         </propertyGroup>
         <propertyGroup caption="Day Settings">
             <property key="useDay" type="boolean" defaultValue="true">
@@ -129,7 +130,7 @@
                 <description></description>
                 <returnType type="Integer" />
             </property>
-            <property key="maxYear" type="expression" required="true" defaultValue="2022">
+            <property key="maxYear" type="expression" required="true" defaultValue="parseInteger(formatDateTime([%CurrentDateTime%], 'yyyy'))">
                 <caption>Maximum Year</caption>
                 <description></description>
                 <returnType type="Integer" />

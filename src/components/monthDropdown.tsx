@@ -1,4 +1,4 @@
-import { createElement, ReactElement, ChangeEvent } from "react";
+import { createElement, ReactElement, ChangeEvent, useState, useEffect } from "react";
 import { MonthTypeEnum } from "../../typings/DropdownDatePickerProps";
 
 export type monthDropdownProps = {
@@ -9,76 +9,21 @@ export type monthDropdownProps = {
     disabled: boolean;
 };
 
-interface Month {
-    num: string;
-    abbr: string;
-    full: string;
-}
-
-const months: Month[] = [
-    {
-        num: "1",
-        abbr: "Jan",
-        full: "January"
-    },
-    {
-        num: "2",
-        abbr: "Feb",
-        full: "February"
-    },
-    {
-        num: "3",
-        abbr: "Mar",
-        full: "March"
-    },
-    {
-        num: "4",
-        abbr: "Apr",
-        full: "April"
-    },
-    {
-        num: "5",
-        abbr: "May",
-        full: "May"
-    },
-    {
-        num: "6",
-        abbr: "Jun",
-        full: "June"
-    },
-    {
-        num: "7",
-        abbr: "Jul",
-        full: "July"
-    },
-    {
-        num: "8",
-        abbr: "Aug",
-        full: "August"
-    },
-    {
-        num: "9",
-        abbr: "Sep",
-        full: "September"
-    },
-    {
-        num: "10",
-        abbr: "Oct",
-        full: "October"
-    },
-    {
-        num: "11",
-        abbr: "Nov",
-        full: "November"
-    },
-    {
-        num: "12",
-        abbr: "Dec",
-        full: "December"
-    }
-];
-
 const MonthDropdown = (props: monthDropdownProps): ReactElement => {
+    const [months, setMonths] = useState<string[]>([]);
+
+    useEffect(() => {
+        const monthFormat = props.monthType === "full" ? "MMMM" : props.monthType === "abbr" ? "MMM" : "M";
+        const monthList: string[] = [];
+        for (let i = 0; i < 12; i++) {
+            /* eslint-disable */
+            // @ts-ignore
+            monthList.push(mx.parser.formatValue(new Date().setMonth(i), "datetime", { datePattern: monthFormat }));
+            /* eslint-enable */
+        }
+        setMonths(monthList);
+    }, [props.monthType]);
+
     const handleSelect = (event: ChangeEvent<HTMLSelectElement>): void => {
         try {
             props.setMonth(parseInt(event.target.value, 10));
@@ -92,14 +37,14 @@ const MonthDropdown = (props: monthDropdownProps): ReactElement => {
         if (props.disabled && props.month !== -1) {
             options.push(
                 <option value={props.month} aria-selected="true">
-                    {months[props.month][props.monthType]}
+                    {months[props.month + 1]}
                 </option>
             );
         } else {
             for (let i = 0; i < 12; i++) {
                 options.push(
                     <option value={i} aria-selected={props.month === i} selected={props.month === i}>
-                        {months[i][props.monthType]}
+                        {months[i]}
                     </option>
                 );
             }

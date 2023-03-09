@@ -48,7 +48,8 @@ const DropdownDatePicker = ({
     name,
     showClearBtn,
     clearBtnTooltip,
-    clearBtnIcon
+    clearBtnIcon,
+    tabIndex
 }: DropdownDatePickerContainerProps): ReactElement => {
     // set state default values, -1 shows the selects label
     const [dropdownState, setDropdownState] = useState<DropdownDatePickerContainerState>(emptyDropdownState);
@@ -200,7 +201,7 @@ const DropdownDatePicker = ({
         date.status === ValueStatus.Available
     ) {
         return (
-            <div id={name} className="widget-dropdowndatepicker">
+            <div id={name} className="widget-dropdowndatepicker" tabIndex={tabIndex}>
                 <div className="dropdowns">
                     {sortDropdowns()
                         .sort((a, b) => a.sort - b.sort)

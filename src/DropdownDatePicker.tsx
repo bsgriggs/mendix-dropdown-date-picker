@@ -29,7 +29,7 @@ const emptyDropdownState = {
 const DropdownDatePicker = ({
     date,
     dayLabel,
-    daySort,
+    // daySort,
     dayType,
     defaultDay,
     defaultMonth,
@@ -37,35 +37,43 @@ const DropdownDatePicker = ({
     maxYear,
     minYear,
     monthLabel,
-    monthSort,
+    // monthSort,
     monthType,
     sortYearsAsc,
     useDay,
     useMonth,
     useYear,
     yearLabel,
-    yearSort,
+    // yearSort,
     name,
     showClearBtn,
     clearBtnTooltip,
     clearBtnIcon,
-    tabIndex
+    tabIndex,
+    dateOrder
 }: DropdownDatePickerContainerProps): ReactElement => {
     // set state default values, -1 shows the selects label
     const [dropdownState, setDropdownState] = useState<DropdownDatePickerContainerState>(emptyDropdownState);
     // sort the order of the dropdowns based on the sort widget settings
     const sortDropdowns = (): dropdown[] => {
-        const dropdowns: dropdown[] = [];
+        const newDropdowns: dropdown[] = [];
+        let localizedPlaceholder = "";
+        if (dateOrder && dateOrder.value?.trim() !== "") {
+            localizedPlaceholder = dateOrder.value as string;
+        } else {
+            /* eslint-disable */
+            // @ts-ignore
+            localizedPlaceholder = date.formatter.getFormatPlaceholder();
+            /* eslint-enable */
+        }
+
         if (
             minYear.status === ValueStatus.Available &&
-            maxYear.status === ValueStatus.Available &&
-            monthSort.status === ValueStatus.Available &&
-            daySort.status === ValueStatus.Available &&
-            yearSort.status === ValueStatus.Available
+            maxYear.status === ValueStatus.Available
         ) {
             if (useMonth) {
-                dropdowns.push({
-                    sort: parseFloat(monthSort.value.toFixed(0)),
+                newDropdowns.push({
+                    sort: localizedPlaceholder.indexOf("m"),
                     element: (
                         <MonthDropdown
                             month={dropdownState.month}
@@ -78,8 +86,8 @@ const DropdownDatePicker = ({
                 });
             }
             if (useDay) {
-                dropdowns.push({
-                    sort: parseFloat(daySort.value.toFixed(0)),
+                newDropdowns.push({
+                    sort: localizedPlaceholder.indexOf("d"),
                     element: (
                         <DayDropdown
                             dayLabel={dayLabel.value as string}
@@ -94,8 +102,8 @@ const DropdownDatePicker = ({
                 });
             }
             if (useYear) {
-                dropdowns.push({
-                    sort: parseFloat(yearSort.value.toFixed(0)),
+                newDropdowns.push({
+                    sort: localizedPlaceholder.indexOf("y"),
                     element: (
                         <YearDropdown
                             year={dropdownState.year}
@@ -110,8 +118,8 @@ const DropdownDatePicker = ({
                 });
             }
             if (showClearBtn && date.value !== undefined) {
-                dropdowns.push({
-                    sort: 10,
+                newDropdowns.push({
+                    sort: 15,
                     element: (
                         <button className="btn mx-button btn-sm btn-default" onClick={handleClear}>
                             <MxIcon
@@ -124,7 +132,7 @@ const DropdownDatePicker = ({
                 });
             }
         }
-        return dropdowns;
+        return newDropdowns;
     };
 
     const handleChange = (newState: DropdownDatePickerContainerState): void => {
@@ -144,9 +152,9 @@ const DropdownDatePicker = ({
             newDate.setMinutes(0);
             newDate.setHours(0);
 
+            newDate.setFullYear(newState.year);
             newDate.setDate(newState.day);
             newDate.setMonth(newState.month);
-            newDate.setFullYear(newState.year);
             // send new date to Mendix
             date.setValue(newDate);
         } else {

@@ -31,7 +31,7 @@ export function preview(props: DropdownDatePickerPreviewProps): ReactElement {
 
         if (props.useMonth) {
             dropdowns.push({
-                sort: parseFloat(props.monthSort),
+                sort: 1,
                 element: (
                     <MonthDropdown
                         month={dropdownState.month}
@@ -46,7 +46,7 @@ export function preview(props: DropdownDatePickerPreviewProps): ReactElement {
         }
         if (props.useDay) {
             dropdowns.push({
-                sort: parseFloat(props.daySort),
+                sort: 2,
                 element: (
                     <DayDropdown
                         dayLabel={props.dayLabel}
@@ -63,7 +63,7 @@ export function preview(props: DropdownDatePickerPreviewProps): ReactElement {
         }
         if (props.useYear) {
             dropdowns.push({
-                sort: parseFloat(props.yearSort),
+                sort: 3,
                 element: (
                     <YearDropdown
                         year={dropdownState.year}

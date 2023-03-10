@@ -41,14 +41,46 @@ export const numberSuffix = (n: number): string => {
 
 export const maxDaysInMonth = (month: number, year: number): number => {
     if (month === -1) {
-        return 0;
+        return 31;
     } else if (month === 0 || month === 2 || month === 4 || month === 6 || month === 7 || month === 9 || month === 11) {
         return 31;
     } else if (month === 3 || month === 5 || month === 8 || month === 10) {
         return 30;
     } else {
-        return isLeapYear(year) ? 29 : 28;
+        return year === -1 || isLeapYear(year) ? 29 : 28;
     }
+};
+
+const renderOptions = (
+    day: number,
+    month: number,
+    year: number,
+    disabled: boolean,
+    dayType: DayTypeEnum,
+    setDay: (newDay: number) => void
+): ReactElement[] => {
+    const options: ReactElement[] = [];
+    if (disabled && day !== -1) {
+        options.push(
+            <option value={day} aria-selected="true">
+                {dayType === "num" ? day : numberSuffix(day)}
+            </option>
+        );
+    } else {
+        const maxDays = maxDaysInMonth(month, year);
+        if (day > -1 && day > maxDays) {
+            setDay(maxDays);
+        }
+        for (let i = 1; i <= maxDays; i++) {
+            options.push(
+                <option value={i} aria-selected={day === i}>
+                    {dayType === "num" ? i : numberSuffix(i)}
+                </option>
+            );
+        }
+    }
+
+    return options;
 };
 
 const DayDropdown = (props: dayDropdownProps): ReactElement => {
@@ -60,34 +92,11 @@ const DayDropdown = (props: dayDropdownProps): ReactElement => {
         }
     };
 
-    const renderOptions = (): ReactElement[] => {
-        const options: ReactElement[] = [];
-        if (props.disabled && props.day !== -1) {
-            options.push(
-                <option value={props.day} aria-selected="true">
-                    {props.dayType === "num" && props.day}
-                    {props.dayType === "withSuffix" && numberSuffix(props.day)}
-                </option>
-            );
-        } else {
-            for (let i = 1; i <= maxDaysInMonth(props.month, props.year); i++) {
-                options.push(
-                    <option value={i} aria-selected={props.day === i}>
-                        {props.dayType === "num" && i}
-                        {props.dayType === "withSuffix" && numberSuffix(i)}
-                    </option>
-                );
-            }
-        }
-
-        return options;
-    };
-
     return (
         <div className="day-dropdown">
             <select
                 className="form-control"
-                disabled={props.month === -1 || props.disabled}
+                disabled={props.disabled}
                 value={props.day === -1 ? props.dayLabel : props.day}
                 onChange={handleSelect}
                 aria-haspopup="listbox"
@@ -95,9 +104,7 @@ const DayDropdown = (props: dayDropdownProps): ReactElement => {
                 <option value={-1} aria-selected={props.day === -1}>
                     {props.dayLabel}
                 </option>
-                {renderOptions().map(option => {
-                    return option;
-                })}
+                {renderOptions(props.day, props.month, props.year, props.disabled, props.dayType, props.setDay)}
             </select>
         </div>
     );

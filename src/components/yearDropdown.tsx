@@ -20,27 +20,25 @@ const YearDropdown = (props: yearDropdownProps): ReactElement => {
     };
 
     const renderOptions = (): ReactElement[] => {
-        const options: ReactElement[] = [];
+        const years: number[] = [];
         if (props.disabled && props.year !== -1) {
-            options.push(
-                <option value={props.year} aria-selected="true">
-                    {props.year}
-                </option>
-            );
+            years.push(props.year);
         } else {
-            for (
-                let i: number = props.sortYearsAsc ? props.minYear : props.maxYear;
-                props.sortYearsAsc ? i <= props.maxYear : i >= props.minYear;
-                props.sortYearsAsc ? i++ : i--
-            ) {
-                options.push(
-                    <option value={i} aria-selected={props.year === i} selected={props.year === i}>
-                        {i}
-                    </option>
-                );
+            for (let i: number = props.minYear; i <= props.maxYear; i++) {
+                years.push(i);
             }
         }
-        return options;
+
+        if (!props.disabled && props.year !== -1 && (props.year > props.maxYear || props.year < props.minYear)) {
+            years.push(props.year);
+        }
+        return years
+            .sort((a, b) => (props.sortYearsAsc ? a - b : b - a))
+            .map(year => (
+                <option value={year} aria-selected={props.year === year} selected={props.year === year}>
+                    {year}
+                </option>
+            ));
     };
 
     return (
@@ -55,9 +53,7 @@ const YearDropdown = (props: yearDropdownProps): ReactElement => {
                 <option value={-1} aria-selected={props.year === -1} selected={props.year === -1}>
                     {props.yearLabel}
                 </option>
-                {renderOptions().map(option => {
-                    return option;
-                })}
+                {renderOptions()}
             </select>
         </div>
     );

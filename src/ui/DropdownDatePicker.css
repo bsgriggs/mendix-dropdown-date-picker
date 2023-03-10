@@ -4,12 +4,5 @@
 
 .widget-dropdowndatepicker .dropdowns{
     display: flex;
+    gap: 8px;
 }
-
-.widget-dropdowndatepicker .dropdowns >div:not(:last-child){
-    margin-right: 8px;
-}
-.widget-dropdowndatepicker+.alert{
-    /* width: 23.9rem;
-    max-width: 100%; */
-};

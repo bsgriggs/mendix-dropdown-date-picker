@@ -1,43 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="mendix.dropdowndatepicker.DropdownDatePicker" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+<widget id="mendix.dropdowndatepicker.DropdownDatePicker" pluginWidget="true"
+    needsEntityContext="true" offlineCapable="true" supportedPlatform="Web"
+    xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
     <name>Dropdown Date Picker</name>
     <description>Datepicker with a dropdowns for Day, Month, and Year with dynamic selection</description>
     <icon />
     <properties>
         <propertyGroup caption="General">
-            <systemProperty key="Label" />
-            <property key="date" type="attribute" required="true" onChange="onDateChange">
-                <caption>Date</caption>
-                <description>The attribute to write the selected Date</description>
-                <attributeTypes>
-                    <attributeType name="DateTime" />
-                </attributeTypes>
-            </property>
-            <property key="onDateChange" type="action">
-                <caption>On change</caption>
-                <description>Action excuted after ALL dropdowns are selected</description>
-            </property>
-            <property key="showClearBtn" type="boolean" defaultValue="true">
-                <caption>Show Clear Button?</caption>
-                <description></description>
-            </property>
-            <property key="clearBtnIcon" type="icon" required="false">
-                <caption>Clear Button Icon</caption>
-                <description></description>
-            </property>
-            <property key="clearBtnTooltip" type="textTemplate" >
-                <caption>Clear Button Tooltip</caption>
-                <description>Text shown when hovering on the Clear Button</description>
-                <translations>
-                    <translation lang="en_US">Clear Date</translation>
-                </translations>
-            </property>
-            <systemProperty key="Visibility" />
-            <systemProperty key="Editability" />
-        </propertyGroup>
-        <propertyGroup caption="Common">
-            <systemProperty key="Name" />
-            <systemProperty key="TabIndex" />
+            <propertyGroup caption="General">
+                <systemProperty key="Label" />
+                <systemProperty key="Visibility" />
+                <systemProperty key="Editability" />
+            </propertyGroup>
+            <propertyGroup caption="Data">
+                <property key="date" type="attribute" required="true" onChange="onDateChange">
+                    <caption>Date</caption>
+                    <description>The attribute to write the selected Date</description>
+                    <attributeTypes>
+                        <attributeType name="DateTime" />
+                    </attributeTypes>
+                </property>
+                <property key="onDateChange" type="action">
+                    <caption>On change</caption>
+                    <description>Action excuted after ALL dropdowns are selected</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Customization">
+                <property key="dateOrder" type="textTemplate" required="false">
+                    <caption>Date order</caption>
+                    <description>The order of the dropdowns. Use 'm' for month, 'd' for day 'y' for year. (i.e. 'mdy' = month, day, year). Leave this blank to automatically use the format from the project's language settings.</description>
+                    <translations>
+                        <translation lang="en_US"></translation>
+                    </translations>
+                </property>
+                <property key="showClearBtn" type="boolean" defaultValue="true">
+                    <caption>Show Clear Button?</caption>
+                    <description></description>
+                </property>
+                <property key="clearBtnIcon" type="icon" required="false">
+                    <caption>Clear Button Icon</caption>
+                    <description></description>
+                </property>
+                <property key="clearBtnTooltip" type="textTemplate">
+                    <caption>Clear Button Tooltip</caption>
+                    <description>Text shown when hovering on the Clear Button</description>
+                    <translations>
+                        <translation lang="en_US">Clear Date</translation>
+                    </translations>
+                </property>
+            </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Month Settings">
             <property key="useMonth" type="boolean" defaultValue="true">
@@ -47,11 +59,6 @@
             <property key="defaultMonth" type="expression" required="true" defaultValue="0">
                 <caption>Default Month</caption>
                 <description>Month used to create the date if Use Month = NO (0 = Jan, 1 = Feb ... 11 = Dec)</description>
-                <returnType type="Integer" />
-            </property>
-            <property key="monthSort" type="expression" required="true" defaultValue="1">
-                <caption>Month Sort</caption>
-                <description>Used to determine the order Month appears relative to Day and Year</description>
                 <returnType type="Integer" />
             </property>
             <property key="monthLabel" type="textTemplate">
@@ -70,7 +77,7 @@
                     <enumerationValue key="full">Full Word</enumerationValue>
                 </enumerationValues>
             </property>
-            
+
         </propertyGroup>
         <propertyGroup caption="Day Settings">
             <property key="useDay" type="boolean" defaultValue="true">
@@ -80,11 +87,6 @@
             <property key="defaultDay" type="expression" required="true" defaultValue="1">
                 <caption>Default Day</caption>
                 <description>Day used to create the date if Use Day = NO</description>
-                <returnType type="Integer" />
-            </property>
-            <property key="daySort" type="expression" required="true" defaultValue="2">
-                <caption>Day Sort</caption>
-                <description>Used to determine the order Day appears relative to Month and Year</description>
                 <returnType type="Integer" />
             </property>
             <property key="dayLabel" type="textTemplate">
@@ -113,11 +115,6 @@
                 <description>Number of Years from the current Year used to create the date if Use Month = NO (0 = current year, -3 = 3 years ago)</description>
                 <returnType type="Integer" />
             </property>
-            <property key="yearSort" type="expression" required="true" defaultValue="3">
-                <caption>Year Sort</caption>
-                <description>Used to determine the order Year appears relative to Month and Day</description>
-                <returnType type="Integer" />
-            </property>
             <property key="yearLabel" type="textTemplate">
                 <caption>Year Placeholder</caption>
                 <description></description>
@@ -125,12 +122,13 @@
                     <translation lang="en_US">Year</translation>
                 </translations>
             </property>
-            <property key="minYear" type="expression" required="true" defaultValue="1922">
+            <property key="minYear" type="expression" required="true" defaultValue="parseInteger(formatDateTime([%CurrentDateTime%], 'yyyy'))-100">
                 <caption>Minimum Year</caption>
                 <description></description>
                 <returnType type="Integer" />
             </property>
-            <property key="maxYear" type="expression" required="true" defaultValue="parseInteger(formatDateTime([%CurrentDateTime%], 'yyyy'))">
+            <property key="maxYear" type="expression" required="true"
+                defaultValue="parseInteger(formatDateTime([%CurrentDateTime%], 'yyyy'))">
                 <caption>Maximum Year</caption>
                 <description></description>
                 <returnType type="Integer" />
@@ -139,6 +137,10 @@
                 <caption>Sort Years Ascending?</caption>
                 <description>The order of the selectable years (Yes = 2019, 2020, 2021 ... No = 2021, 2020, 2019)</description>
             </property>
+        </propertyGroup>
+        <propertyGroup caption="Common">
+            <systemProperty key="Name" />
+            <systemProperty key="TabIndex" />
         </propertyGroup>
     </properties>
 </widget>

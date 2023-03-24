@@ -35,7 +35,7 @@ const YearDropdown = (props: yearDropdownProps): ReactElement => {
         return years
             .sort((a, b) => (props.sortYearsAsc ? a - b : b - a))
             .map(year => (
-                <option value={year} aria-selected={props.year === year} selected={props.year === year}>
+                <option key={year} value={year} aria-selected={props.year === year} selected={props.year === year}>
                     {year}
                 </option>
             ));

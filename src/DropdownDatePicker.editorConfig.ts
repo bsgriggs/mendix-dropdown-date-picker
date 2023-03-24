@@ -41,7 +41,7 @@ export function getProperties(_values: DropdownDatePickerPreviewProps, defaultPr
     if (_values.useMonth) {
         hidePropertiesIn(defaultProperties, _values, ["defaultMonth"]);
     } else {
-        hidePropertiesIn(defaultProperties, _values, [ "monthLabel", "monthType"]);
+        hidePropertiesIn(defaultProperties, _values, ["monthLabel", "monthType"]);
     }
     if (_values.useYear) {
         hidePropertiesIn(defaultProperties, _values, ["defaultYear"]);

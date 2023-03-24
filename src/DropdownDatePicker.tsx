@@ -67,10 +67,7 @@ const DropdownDatePicker = ({
             /* eslint-enable */
         }
 
-        if (
-            minYear.status === ValueStatus.Available &&
-            maxYear.status === ValueStatus.Available
-        ) {
+        if (minYear.status === ValueStatus.Available && maxYear.status === ValueStatus.Available) {
             if (useMonth) {
                 newDropdowns.push({
                     sort: localizedPlaceholder.indexOf("m"),

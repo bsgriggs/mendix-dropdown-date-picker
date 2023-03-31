@@ -15,10 +15,13 @@ const MonthDropdown = (props: monthDropdownProps): ReactElement => {
     useEffect(() => {
         const monthFormat = props.monthType === "full" ? "MMMM" : props.monthType === "abbr" ? "MMM" : "M";
         const monthList: string[] = [];
+        const monthTemplate = new Date();
+        // Day is preserved when setting a month, so must set Date to 1 to avoid attempting to set Feb 30th, 31st etc and rolling over to March
+        monthTemplate.setDate(1);
         for (let i = 0; i < 12; i++) {
             /* eslint-disable */
             // @ts-ignore
-            monthList.push(mx.parser.formatValue(new Date().setMonth(i), "datetime", { datePattern: monthFormat }));
+            monthList.push(mx.parser.formatValue(monthTemplate.setMonth(i), "datetime", { datePattern: monthFormat }));
             /* eslint-enable */
         }
         setMonths(monthList);

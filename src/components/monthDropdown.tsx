@@ -28,6 +28,7 @@ const MonthDropdown = (props: monthDropdownProps): ReactElement => {
     }, [props.monthType]);
 
     const handleSelect = (event: ChangeEvent<HTMLSelectElement>): void => {
+        console.info("selected", event.target.value)
         try {
             props.setMonth(parseInt(event.target.value, 10));
         } catch (e) {

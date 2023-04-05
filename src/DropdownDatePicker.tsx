@@ -1,11 +1,12 @@
 import { createElement, useState, useEffect, ReactElement } from "react";
-import DayDropdown, { maxDaysInMonth } from "./components/dayDropdown";
+import DayDropdown from "./components/dayDropdown";
 import MonthDropdown from "./components/monthDropdown";
 import YearDropdown from "./components/yearDropdown";
 import { DropdownDatePickerContainerProps } from "../typings/DropdownDatePickerProps";
-import { ValueStatus } from "mendix";
+import { ValueStatus, DynamicValue } from "mendix";
 import Alert from "./components/alert";
 import MxIcon from "./components/MxIcon";
+import { Big } from "big.js";
 
 import "./ui/DropdownDatePicker.css";
 
@@ -24,6 +25,19 @@ const emptyDropdownState = {
     month: -1,
     day: -1,
     year: -1
+};
+
+const FormatDefaults = (
+    defaultMonth: DynamicValue<Big>,
+    defaultDay: DynamicValue<Big>,
+    defaultYear: DynamicValue<Big>
+): DropdownDatePickerContainerState => {
+    const defaultMonthState = defaultMonth.value ? parseFloat(defaultMonth.value.toFixed(0)) : 0;
+    const defaultDayState = defaultDay.value ? parseFloat(defaultDay.value.toFixed(0)) : 1;
+    const defaultYearState = defaultYear.value
+        ? new Date().getFullYear() + parseFloat(defaultYear.value.toFixed(0))
+        : new Date().getFullYear();
+    return { day: defaultDayState, month: defaultMonthState, year: defaultYearState };
 };
 
 const DropdownDatePicker = ({
@@ -54,6 +68,7 @@ const DropdownDatePicker = ({
 }: DropdownDatePickerContainerProps): ReactElement => {
     // set state default values, -1 shows the selects label
     const [dropdownState, setDropdownState] = useState<DropdownDatePickerContainerState>(emptyDropdownState);
+    const defaults = FormatDefaults(defaultMonth, defaultDay, defaultYear);
     // sort the order of the dropdowns based on the sort widget settings
     const sortDropdowns = (): dropdown[] => {
         const newDropdowns: dropdown[] = [];
@@ -133,25 +148,16 @@ const DropdownDatePicker = ({
     };
 
     const handleChange = (newState: DropdownDatePickerContainerState): void => {
+        console.info("newState", newState);
         // update the state with the value from the child component
         setDropdownState(newState);
         // attempt to create and update mendix with the new date
-        if (
-            newState.month !== -1 &&
-            newState.day !== -1 &&
-            newState.year !== -1 &&
-            maxDaysInMonth(newState.month, newState.year) >= newState.day
-        ) {
-            const newDate = new Date();
-            // clear Time
-            newDate.setMilliseconds(0);
-            newDate.setSeconds(0);
-            newDate.setMinutes(0);
-            newDate.setHours(0);
+        if (newState.month !== -1 && newState.day !== -1 && newState.year !== -1) {
+            const month = useMonth ? newState.month : defaults.month;
+            const day = useDay ? newState.day : defaults.day;
+            const year = useYear ? newState.year : defaults.year;
 
-            newDate.setFullYear(newState.year);
-            newDate.setDate(newState.day);
-            newDate.setMonth(newState.month);
+            const newDate = new Date(year, month, day);
             // send new date to Mendix
             date.setValue(newDate);
         } else {
@@ -175,29 +181,14 @@ const DropdownDatePicker = ({
             });
         } else {
             // Values used if the month, day, or year are disabled
-            const defaultMonthState = defaultMonth.value ? parseFloat(defaultMonth.value.toFixed(0)) : 0;
-            const defaultDayState = defaultDay.value ? parseFloat(defaultDay.value.toFixed(0)) : 1;
-            const defaultYearState = defaultYear.value
-                ? new Date().getFullYear() + parseFloat(defaultYear.value.toFixed(0))
-                : new Date().getFullYear();
             setDropdownState({
-                month: useMonth ? dropdownState.month : defaultMonthState,
-                day: useDay ? dropdownState.day : defaultDayState,
-                year: useYear ? dropdownState.year : defaultYearState
+                month: useMonth ? dropdownState.month : defaults.month,
+                day: useDay ? dropdownState.day : defaults.day,
+                year: useYear ? dropdownState.year : defaults.year
             });
         }
-    }, [
-        date,
-        defaultDay.value,
-        defaultMonth.value,
-        defaultYear.value,
-        dropdownState.day,
-        dropdownState.month,
-        dropdownState.year,
-        useDay,
-        useMonth,
-        useYear
-    ]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [date]);
 
     // Only render after the attributes are ready
     if (

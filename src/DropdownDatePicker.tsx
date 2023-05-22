@@ -148,18 +148,16 @@ const DropdownDatePicker = ({
     };
 
     const handleChange = (newState: DropdownDatePickerContainerState): void => {
-        console.info("newState", newState);
         // update the state with the value from the child component
         setDropdownState(newState);
         // attempt to create and update mendix with the new date
-        if (newState.month !== -1 && newState.day !== -1 && newState.year !== -1) {
-            const month = useMonth ? newState.month : defaults.month;
-            const day = useDay ? newState.day : defaults.day;
-            const year = useYear ? newState.year : defaults.year;
-
-            const newDate = new Date(year, month, day);
+        const month = useMonth ? newState.month : defaults.month;
+        const day = useDay ? newState.day : defaults.day;
+        const year = useYear ? newState.year : defaults.year;
+        // console.info("newStates", {month,day,year})
+        if (month !== -1 && day !== -1 && year !== -1) {
             // send new date to Mendix
-            date.setValue(newDate);
+            date.setValue(new Date(year, month, day));
         } else {
             // if not all of the dropdowns have been select, set the mendix value as empty
             date.setValue(undefined);
@@ -180,12 +178,13 @@ const DropdownDatePicker = ({
                 year: date.value.getFullYear()
             });
         } else {
-            // Values used if the month, day, or year are disabled
-            setDropdownState({
-                month: useMonth ? dropdownState.month : defaults.month,
-                day: useDay ? dropdownState.day : defaults.day,
-                year: useYear ? dropdownState.year : defaults.year
-            });
+            setDropdownState(emptyDropdownState);
+            // // Values used if the month, day, or year are disabled
+            // setDropdownState({
+            //     month: useMonth ? dropdownState.month : defaults.month,
+            //     day: useDay ? dropdownState.day : defaults.day,
+            //     year: useYear ? dropdownState.year : defaults.year
+            // });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [date]);

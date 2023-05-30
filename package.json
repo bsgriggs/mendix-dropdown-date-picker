@@ -1,7 +1,7 @@
 {
   "name": "dropdowndatepicker",
   "widgetName": "DropdownDatePicker",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Datepicker with a dropdowns for Day, Month, and Year with dynamic selection",
   "copyright": "Benjamin Griggs",
   "author": "Benjamin Griggs",

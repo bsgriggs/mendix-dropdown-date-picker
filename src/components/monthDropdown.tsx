@@ -41,7 +41,7 @@ const MonthDropdown = (props: monthDropdownProps): ReactElement => {
         if (props.disabled && props.month !== -1) {
             options.push(
                 <option value={props.month} aria-selected="true">
-                    {months[props.month + 1]}
+                    {months[props.month]}
                 </option>
             );
         } else {

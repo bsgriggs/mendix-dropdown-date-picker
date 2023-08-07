@@ -3,7 +3,8 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { DynamicValue, EditableValue, WebIcon } from "mendix";
+import { CSSProperties } from "react";
+import { ActionValue, DynamicValue, EditableValue, WebIcon } from "mendix";
 import { Big } from "big.js";
 
 export type MonthTypeEnum = "num" | "abbr" | "full";
@@ -12,9 +13,12 @@ export type DayTypeEnum = "num" | "withSuffix";
 
 export interface DropdownDatePickerContainerProps {
     name: string;
+    class: string;
+    style?: CSSProperties;
     tabIndex?: number;
     id: string;
     date: EditableValue<Date>;
+    onDateChange?: ActionValue;
     dateOrder?: DynamicValue<string>;
     showClearBtn: boolean;
     clearBtnIcon?: DynamicValue<WebIcon>;
@@ -36,7 +40,8 @@ export interface DropdownDatePickerContainerProps {
 }
 
 export interface DropdownDatePickerPreviewProps {
-    readOnly: boolean;
+    class: string;
+    style: string;
     date: string;
     onDateChange: {} | null;
     dateOrder: string;

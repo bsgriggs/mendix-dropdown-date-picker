@@ -49,6 +49,7 @@ const YearDropdown = (props: yearDropdownProps): ReactElement => {
                 onChange={handleSelect}
                 aria-haspopup="listbox"
                 disabled={props.disabled}
+                aria-label={props.yearLabel}
             >
                 <option value={-1} aria-selected={props.year === -1} selected={props.year === -1}>
                     {props.yearLabel}

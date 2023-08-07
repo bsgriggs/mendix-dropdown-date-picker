@@ -64,6 +64,7 @@ const MonthDropdown = (props: monthDropdownProps): ReactElement => {
                 onChange={handleSelect}
                 aria-haspopup="listbox"
                 disabled={props.disabled}
+                aria-label={props.monthLabel}
             >
                 <option value={-1} aria-selected={props.month === -1} selected={props.month === -1}>
                     {props.monthLabel}

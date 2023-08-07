@@ -39,7 +39,7 @@ export function preview(props: DropdownDatePickerPreviewProps): ReactElement {
                         monthLabel={props.monthLabel}
                         // eslint-disable-next-line @typescript-eslint/no-empty-function
                         setMonth={() => {}}
-                        disabled={props.readOnly}
+                        disabled={false}
                     />
                 )
             });
@@ -56,7 +56,7 @@ export function preview(props: DropdownDatePickerPreviewProps): ReactElement {
                         month={dropdownState.month}
                         day={dropdownState.day}
                         year={dropdownState.year}
-                        disabled={props.readOnly}
+                        disabled={false}
                     />
                 )
             });
@@ -73,7 +73,7 @@ export function preview(props: DropdownDatePickerPreviewProps): ReactElement {
                         yearLabel={props.yearLabel}
                         // eslint-disable-next-line @typescript-eslint/no-empty-function
                         setYear={() => {}}
-                        disabled={props.readOnly}
+                        disabled={false}
                     />
                 )
             });

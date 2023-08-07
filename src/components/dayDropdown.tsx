@@ -100,6 +100,7 @@ const DayDropdown = (props: dayDropdownProps): ReactElement => {
                 value={props.day === -1 ? props.dayLabel : props.day}
                 onChange={handleSelect}
                 aria-haspopup="listbox"
+                aria-label={props.dayLabel}
             >
                 <option value={-1} aria-selected={props.day === -1}>
                     {props.dayLabel}

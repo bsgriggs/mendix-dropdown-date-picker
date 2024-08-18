@@ -1,4 +1,4 @@
-import { FunctionComponent, createElement, ReactElement } from "react";
+import { createElement, ReactElement, PropsWithChildren } from "react";
 
 export interface AlertProps {
     id?: string;
@@ -6,9 +6,7 @@ export interface AlertProps {
     className?: string;
 }
 
-const Alert: FunctionComponent<AlertProps> = ({ alertStyle, className, children, id }): ReactElement => {
-    Alert.displayName = "Alert";
-    Alert.defaultProps = { alertStyle: "danger" };
+const Alert = ({ id, alertStyle = "danger", children, className }: PropsWithChildren<AlertProps>): ReactElement => {
     return (
         <div id={id} className={`alert alert-${alertStyle} mx-validation-message ${className}`}>
             {children}

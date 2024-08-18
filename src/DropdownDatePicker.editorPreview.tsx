@@ -1,30 +1,14 @@
 import { ReactElement, createElement } from "react";
 import { DropdownDatePickerPreviewProps } from "../typings/DropdownDatePickerProps";
 import { WebIcon } from "mendix";
-import DayDropdown from "./components/dayDropdown";
-import MonthDropdown from "./components/monthDropdown";
 import MxIcon from "./components/MxIcon";
-import YearDropdown from "./components/yearDropdown";
+
+type dropdown = {
+    sort: number;
+    element: ReactElement;
+};
 
 export function preview(props: DropdownDatePickerPreviewProps): ReactElement {
-    type DropdownDatePickerContainerState = {
-        month: number;
-        day: number;
-        year: number;
-    };
-
-    type dropdown = {
-        sort: number;
-        element: ReactElement;
-    };
-
-    const currentDateTime = new Date();
-    const dropdownState: DropdownDatePickerContainerState = {
-        month: currentDateTime.getMonth(),
-        day: currentDateTime.getDate(),
-        year: currentDateTime.getFullYear()
-    };
-
     // sort the order of the dropdowns based on the sort widget settings
     const sortDropdowns = (): dropdown[] => {
         const dropdowns: dropdown[] = [];
@@ -33,14 +17,11 @@ export function preview(props: DropdownDatePickerPreviewProps): ReactElement {
             dropdowns.push({
                 sort: 1,
                 element: (
-                    <MonthDropdown
-                        month={dropdownState.month}
-                        monthType={props.monthType}
-                        monthLabel={props.monthLabel}
-                        // eslint-disable-next-line @typescript-eslint/no-empty-function
-                        setMonth={() => {}}
-                        disabled={false}
-                    />
+                    <div className="month-dropdown">
+                        <select className="form-control" value={props.monthLabel}>
+                            <option value={props.monthLabel}>{props.monthLabel}</option>
+                        </select>
+                    </div>
                 )
             });
         }
@@ -48,16 +29,11 @@ export function preview(props: DropdownDatePickerPreviewProps): ReactElement {
             dropdowns.push({
                 sort: 2,
                 element: (
-                    <DayDropdown
-                        dayLabel={props.dayLabel}
-                        // eslint-disable-next-line @typescript-eslint/no-empty-function
-                        setDay={() => {}}
-                        dayType={props.dayType}
-                        month={dropdownState.month}
-                        day={dropdownState.day}
-                        year={dropdownState.year}
-                        disabled={false}
-                    />
+                    <div className="day-dropdown">
+                        <select className="form-control" value={props.dayLabel}>
+                            <option value={props.dayLabel}>{props.dayLabel}</option>
+                        </select>
+                    </div>
                 )
             });
         }
@@ -65,16 +41,11 @@ export function preview(props: DropdownDatePickerPreviewProps): ReactElement {
             dropdowns.push({
                 sort: 3,
                 element: (
-                    <YearDropdown
-                        year={dropdownState.year}
-                        minYear={parseFloat(props.minYear)}
-                        maxYear={parseFloat(props.maxYear)}
-                        sortYearsAsc={props.sortYearsAsc}
-                        yearLabel={props.yearLabel}
-                        // eslint-disable-next-line @typescript-eslint/no-empty-function
-                        setYear={() => {}}
-                        disabled={false}
-                    />
+                    <div className="year-dropdown">
+                        <select className="form-control" value={props.yearLabel}>
+                            <option value={props.yearLabel}>{props.yearLabel}</option>
+                        </select>
+                    </div>
                 )
             });
         }

@@ -1,10 +1,9 @@
 /**
  * This file was generated from DropdownDatePicker.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix UI Content Team
+ * @author Mendix Widgets Framework Team
  */
-import { CSSProperties } from "react";
-import { ActionValue, DynamicValue, EditableValue, WebIcon } from "mendix";
+import { DynamicValue, EditableValue, WebIcon } from "mendix";
 import { Big } from "big.js";
 
 export type MonthTypeEnum = "num" | "abbr" | "full";
@@ -13,12 +12,9 @@ export type DayTypeEnum = "num" | "withSuffix";
 
 export interface DropdownDatePickerContainerProps {
     name: string;
-    class: string;
-    style?: CSSProperties;
     tabIndex?: number;
     id: string;
     date: EditableValue<Date>;
-    onDateChange?: ActionValue;
     dateOrder?: DynamicValue<string>;
     showClearBtn: boolean;
     clearBtnIcon?: DynamicValue<WebIcon>;
@@ -40,13 +36,12 @@ export interface DropdownDatePickerContainerProps {
 }
 
 export interface DropdownDatePickerPreviewProps {
-    class: string;
-    style: string;
+    readOnly: boolean;
     date: string;
     onDateChange: {} | null;
     dateOrder: string;
     showClearBtn: boolean;
-    clearBtnIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    clearBtnIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; iconUrl: string; } | { type: "icon"; iconClass: string; } | undefined;
     clearBtnTooltip: string;
     useMonth: boolean;
     defaultMonth: string;

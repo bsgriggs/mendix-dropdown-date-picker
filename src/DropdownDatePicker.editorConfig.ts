@@ -1,25 +1,14 @@
 import { DropdownDatePickerPreviewProps } from "../typings/DropdownDatePickerProps";
-import { Problem, Properties, hidePropertiesIn } from "@mendix/pluggable-widgets-tools";
+import { Problem, Properties, hidePropertyIn, hidePropertiesIn } from "@mendix/pluggable-widgets-tools";
 import { PreviewProps } from "../typings/PreviewProps";
 
 export function getProperties(_values: DropdownDatePickerPreviewProps, defaultProperties: Properties): Properties {
-    if (_values.useDay) {
-        hidePropertiesIn(defaultProperties, _values, ["defaultDay"]);
-    } else {
-        hidePropertiesIn(defaultProperties, _values, ["dayLabel", "dayType"]);
-    }
-    if (_values.useMonth) {
-        hidePropertiesIn(defaultProperties, _values, ["defaultMonth"]);
-    } else {
-        hidePropertiesIn(defaultProperties, _values, ["monthLabel", "monthType"]);
-    }
-    if (_values.useYear) {
-        hidePropertiesIn(defaultProperties, _values, ["defaultYear"]);
-    } else {
-        hidePropertiesIn(defaultProperties, _values, ["minYear", "maxYear", "sortYearsAsc", "yearLabel"]);
-    }
     if (!_values.showClearBtn) {
         hidePropertiesIn(defaultProperties, _values, ["clearBtnIcon", "clearBtnTooltip"]);
+    }
+
+    if (_values.dateFormat !== "CUSTOM") {
+        hidePropertyIn(defaultProperties, _values, "customDateFormat");
     }
 
     return defaultProperties;
@@ -28,25 +17,25 @@ export function getProperties(_values: DropdownDatePickerPreviewProps, defaultPr
 export function check(_values: DropdownDatePickerPreviewProps): Problem[] {
     const errors: Problem[] = [];
 
-    if (_values.useDay === false && _values.useMonth === false && _values.useYear === false) {
-        errors.push(
-            {
-                property: `useDay`,
-                message: `At least 1 dropdown must be used.`,
-                url: "https://github.com/bsgriggs/mendix-dropdown-date-picker"
-            },
-            {
-                property: `useMonth`,
-                message: `At least 1 dropdown must be used.`,
-                url: "https://github.com/bsgriggs/mendix-dropdown-date-picker"
-            },
-            {
-                property: `useYear`,
-                message: `At least 1 dropdown must be used.`,
-                url: "https://github.com/bsgriggs/mendix-dropdown-date-picker"
-            }
-        );
-    }
+    // if (_values.useDay === false && _values.useMonth === false && _values.useYear === false) {
+    //     errors.push(
+    //         {
+    //             property: `useDay`,
+    //             message: `At least 1 dropdown must be used.`,
+    //             url: "https://github.com/bsgriggs/mendix-dropdown-date-picker"
+    //         },
+    //         {
+    //             property: `useMonth`,
+    //             message: `At least 1 dropdown must be used.`,
+    //             url: "https://github.com/bsgriggs/mendix-dropdown-date-picker"
+    //         },
+    //         {
+    //             property: `useYear`,
+    //             message: `At least 1 dropdown must be used.`,
+    //             url: "https://github.com/bsgriggs/mendix-dropdown-date-picker"
+    //         }
+    //     );
+    // }
 
     return errors;
 }

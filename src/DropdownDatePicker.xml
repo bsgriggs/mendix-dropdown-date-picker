@@ -4,46 +4,49 @@
     xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
     <name>Dropdown Date Picker</name>
-    <description>Datepicker with a dropdowns for Day, Month, and Year with dynamic selection</description>
+    <description>Date picker with a dropdowns for Day, Month, and Year with dynamic selection</description>
     <icon />
     <properties>
         <propertyGroup caption="General">
-            <propertyGroup caption="General">
+            <propertyGroup caption="Label">
                 <systemProperty key="Label" />
-                <systemProperty key="Visibility" />
-                <systemProperty key="Editability" />
             </propertyGroup>
             <propertyGroup caption="Data">
                 <property key="date" type="attribute" required="true" onChange="onDateChange">
                     <caption>Date</caption>
-                    <description>The attribute to write the selected Date</description>
+                    <description></description>
                     <attributeTypes>
                         <attributeType name="DateTime" />
                     </attributeTypes>
                 </property>
-                <property key="onDateChange" type="action">
-                    <caption>On change</caption>
-                    <description>Action excuted after ALL dropdowns are selected</description>
+                <property key="dateFormat" type="enumeration" defaultValue="DATE">
+                    <caption>Date format</caption>
+                    <description>Date, Time, and Date and Time are based on the current user's language settings. Month is "MMMM yyyy" and Year is "yyyy"</description>
+                    <enumerationValues>
+                        <enumerationValue key="DATE">Date</enumerationValue>
+                        <enumerationValue key="MONTH">Month</enumerationValue>
+                        <enumerationValue key="YEAR">Year</enumerationValue>
+                        <enumerationValue key="TIME">Time</enumerationValue>
+                        <enumerationValue key="DATETIME">Date and Time</enumerationValue>
+                        <enumerationValue key="CUSTOM">Custom</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="customDateFormat" type="textTemplate" required="true">
+                    <caption>Custom date format</caption>
+                    <description>Only characters 'y', 'Y', 'M', 'd', 'H', 'h', 'm', 's', 'a' are used.</description>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Customization">
-                <property key="dateOrder" type="textTemplate" required="false">
-                    <caption>Date order</caption>
-                    <description>The order of the dropdowns. Use 'm' for month, 'd' for day 'y' for year. (i.e. 'mdy' = month, day, year). Leave this blank to automatically use the format from the project's language settings.</description>
-                    <translations>
-                        <translation lang="en_US"></translation>
-                    </translations>
-                </property>
+            <propertyGroup caption="Clear button">
                 <property key="showClearBtn" type="boolean" defaultValue="true">
-                    <caption>Show Clear Button?</caption>
+                    <caption>Show clear button?</caption>
                     <description></description>
                 </property>
                 <property key="clearBtnIcon" type="icon" required="false">
-                    <caption>Clear Button Icon</caption>
+                    <caption>Clear button icon</caption>
                     <description></description>
                 </property>
                 <property key="clearBtnTooltip" type="textTemplate">
-                    <caption>Clear Button Tooltip</caption>
+                    <caption>Clear button tooltip</caption>
                     <description>Text shown when hovering on the Clear Button</description>
                     <translations>
                         <translation lang="en_US">Clear Date</translation>
@@ -51,78 +54,9 @@
                 </property>
             </propertyGroup>
         </propertyGroup>
-        <propertyGroup caption="Month Settings">
-            <property key="useMonth" type="boolean" defaultValue="true">
-                <caption>Use Month?</caption>
-                <description>Show the Month dropdown?</description>
-            </property>
-            <property key="defaultMonth" type="expression" required="true" defaultValue="0">
-                <caption>Default Month</caption>
-                <description>Month used to create the date if Use Month = NO (0 = Jan, 1 = Feb ... 11 = Dec)</description>
-                <returnType type="Integer" />
-            </property>
-            <property key="monthLabel" type="textTemplate">
-                <caption>Month Placeholder</caption>
-                <description></description>
-                <translations>
-                    <translation lang="en_US">Month</translation>
-                </translations>
-            </property>
-            <property key="monthType" type="enumeration" defaultValue="num">
-                <caption>Month Display</caption>
-                <description>Which values to display in the month dropdown (9, Sep, September)</description>
-                <enumerationValues>
-                    <enumerationValue key="num">Number</enumerationValue>
-                    <enumerationValue key="abbr">Abbreviation</enumerationValue>
-                    <enumerationValue key="full">Full Word</enumerationValue>
-                </enumerationValues>
-            </property>
-
-        </propertyGroup>
-        <propertyGroup caption="Day Settings">
-            <property key="useDay" type="boolean" defaultValue="true">
-                <caption>Use Day?</caption>
-                <description>Show the Day dropdown?</description>
-            </property>
-            <property key="defaultDay" type="expression" required="true" defaultValue="1">
-                <caption>Default Day</caption>
-                <description>Day used to create the date if Use Day = NO</description>
-                <returnType type="Integer" />
-            </property>
-            <property key="dayLabel" type="textTemplate">
-                <caption>Day Placeholder</caption>
-                <description></description>
-                <translations>
-                    <translation lang="en_US">Day</translation>
-                </translations>
-            </property>
-            <property key="dayType" type="enumeration" defaultValue="num">
-                <caption>Day Display</caption>
-                <description>Which values to display in the day dropdown (9, 9th)</description>
-                <enumerationValues>
-                    <enumerationValue key="num">Number</enumerationValue>
-                    <enumerationValue key="withSuffix">With Suffix</enumerationValue>
-                </enumerationValues>
-            </property>
-        </propertyGroup>
-        <propertyGroup caption="Year Settings">
-            <property key="useYear" type="boolean" defaultValue="true">
-                <caption>Use Year?</caption>
-                <description>Show the Year dropdown?</description>
-            </property>
-            <property key="defaultYear" type="expression" required="true" defaultValue="0">
-                <caption>Default Year</caption>
-                <description>Number of Years from the current Year used to create the date if Use Month = NO (0 = current year, -3 = 3 years ago)</description>
-                <returnType type="Integer" />
-            </property>
-            <property key="yearLabel" type="textTemplate">
-                <caption>Year Placeholder</caption>
-                <description></description>
-                <translations>
-                    <translation lang="en_US">Year</translation>
-                </translations>
-            </property>
-            <property key="minYear" type="expression" required="true" defaultValue="parseInteger(formatDateTime([%CurrentDateTime%], 'yyyy'))-100">
+        <propertyGroup caption="Customization">
+            <property key="minYear" type="expression" required="true"
+                defaultValue="parseInteger(formatDateTime([%CurrentDateTime%], 'yyyy'))-100">
                 <caption>Minimum Year</caption>
                 <description></description>
                 <returnType type="Integer" />
@@ -133,14 +67,137 @@
                 <description></description>
                 <returnType type="Integer" />
             </property>
-            <property key="sortYearsAsc" type="boolean" defaultValue="false">
+            <property key="sortYearsAsc" type="expression" defaultValue="false" required="true">
                 <caption>Sort Years Ascending?</caption>
-                <description>The order of the selectable years (Yes = 2019, 2020, 2021 ... No = 2021, 2020, 2019)</description>
+                <description>The order of the selectable years (Yes = 2019 - 2021, No = 2021 - 2019)</description>
+                <returnType type="Boolean" />
+            </property>
+            <property key="includeDateSuffix" type="boolean" defaultValue="false">
+                <caption>Include date suffix</caption>
+                <description>Adds text after the day's number (i.e. 1st, 2nd, 3rd, 4th)</description>
+            </property>
+            <property key="readOnlyDisplayType" type="enumeration" defaultValue="DROPDOWNS">
+                <caption>Read only display type</caption>
+                <description></description>
+                <enumerationValues>
+                    <enumerationValue key="DROPDOWNS">Dropdowns</enumerationValue>
+                    <enumerationValue key="TEXT">Text</enumerationValue>
+                </enumerationValues>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Defaults">
+            <property key="defaultYear" type="expression" required="true"
+                defaultValue="parseInteger(formatDateTime([%CurrentDateTime%], 'yyyy'))">
+                <caption>Year</caption>
+                <description>Year used when the date format does not include a 'Y' or 'y' (0 = current year)</description>
+                <returnType type="Integer" />
+            </property>
+            <property key="defaultMonth" type="expression" required="true" defaultValue="0">
+                <caption>Month</caption>
+                <description>Month used when the date format does not include a 'M'</description>
+                <returnType type="Integer" />
+            </property>
+            <property key="defaultDay" type="expression" required="true" defaultValue="1">
+                <caption>Day</caption>
+                <description>Day used when the date format does not include a 'd' </description>
+                <returnType type="Integer" />
+            </property>
+            <property key="defaultHour" type="expression" required="true" defaultValue="0">
+                <caption>Hour</caption>
+                <description>Hour used when the date format does not include a 'H' or 'h'</description>
+                <returnType type="Integer" />
+            </property>
+            <property key="defaultMinute" type="expression" required="true" defaultValue="0">
+                <caption>Minute</caption>
+                <description>Minute used when the date format does not include a 'm'</description>
+                <returnType type="Integer" />
+            </property>
+            <property key="defaultSecond" type="expression" required="true" defaultValue="0">
+                <caption>Second</caption>
+                <description>Second used when the date format does not include a 's'</description>
+                <returnType type="Integer" />
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Text">
+            <property key="yearLabel" type="textTemplate">
+                <caption>Year Label</caption>
+                <description></description>
+                <translations>
+                    <translation lang="en_US">Year</translation>
+                </translations>
+            </property>
+            <property key="monthLabel" type="textTemplate">
+                <caption>Month Label</caption>
+                <description></description>
+                <translations>
+                    <translation lang="en_US">Month</translation>
+                </translations>
+            </property>
+            <property key="dayLabel" type="textTemplate">
+                <caption>Day Label</caption>
+                <description></description>
+                <translations>
+                    <translation lang="en_US">Day</translation>
+                </translations>
+            </property>
+            <property key="hourLabel" type="textTemplate">
+                <caption>Hour Label</caption>
+                <description></description>
+                <translations>
+                    <translation lang="en_US">Hour</translation>
+                </translations>
+            </property>
+            <property key="minuteLabel" type="textTemplate">
+                <caption>Minute Label</caption>
+                <description></description>
+                <translations>
+                    <translation lang="en_US">Minute</translation>
+                </translations>
+            </property>
+            <property key="secondLabel" type="textTemplate">
+                <caption>Second Label</caption>
+                <description></description>
+                <translations>
+                    <translation lang="en_US">Second</translation>
+                </translations>
+            </property>
+            <property key="amPmLabel" type="textTemplate">
+                <caption>Am/Pm Label</caption>
+                <description></description>
+                <translations>
+                    <translation lang="en_US">Am/Pm</translation>
+                </translations>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Events">
+            <property key="onDateChange" type="action">
+                <caption>On date change</caption>
+                <description>Action executed after ALL dropdowns are selected</description>
+            </property>
+            <property key="onDropChange" type="action">
+                <caption>On dropdown change</caption>
+                <description>Action executed after ANY dropdown is changed</description>
+            </property>
+            <property key="onEnter" type="action">
+                <caption>On enter</caption>
+                <description>Action executed when the user enters any dropdown</description>
+            </property>
+            <property key="onLeave" type="action">
+                <caption>On leave</caption>
+                <description>Action executed when the user leaves any dropdown</description>
             </property>
         </propertyGroup>
         <propertyGroup caption="Common">
-            <systemProperty key="Name" />
-            <systemProperty key="TabIndex" />
+            <propertyGroup caption="Common">
+                <systemProperty key="Name" />
+                <systemProperty key="TabIndex" />
+            </propertyGroup>
+            <propertyGroup caption="Visibility">
+                <systemProperty key="Visibility" />
+            </propertyGroup>
+            <propertyGroup caption="Editbality">
+                <systemProperty key="Editability" />
+            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>

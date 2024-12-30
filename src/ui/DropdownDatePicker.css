@@ -2,7 +2,7 @@
     width: fit-content;
 }
 
-.widget-dropdowndatepicker .dropdowns{
+.widget-dropdowndatepicker .dropdowns {
     display: flex;
-    gap: 8px;
+    gap: 1rem;
 }

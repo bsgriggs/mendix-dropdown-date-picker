@@ -8,12 +8,13 @@ Date picker with drop downs for Day, Month, and Year with dynamic selection.
 
 -   The order of the dropdowns is automatically sorted based on the current user's language settings, but can also be
     manually set
--   Ability to control the format of the months (i.e. 2, Feb, or February)
 -   Ability to control the format of the days (i.e. 4, 4th)
 -   Ability to control how many years are selectable as an integer expression (i.e.
     parseInteger(formatDateTime([%CurrentDateTime%], 'yyyy')) - 50)
 -   Automatically changes the selectable days by the month and year
 -   Ability to use each dropdown individually (i.e. only select year, only select month and year...)
+-   Supports times & custom date formats (valid characters: y, Y, M, d, h, m, s, a)
+-   Control the format of the dropdowns using the date format (i.e. M = 2, MM = 02, MMM = Feb, MMMM = February)
 
 ## Configuration
 

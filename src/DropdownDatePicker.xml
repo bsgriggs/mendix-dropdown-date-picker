@@ -195,7 +195,7 @@
             <propertyGroup caption="Visibility">
                 <systemProperty key="Visibility" />
             </propertyGroup>
-            <propertyGroup caption="Editbality">
+            <propertyGroup caption="Editability">
                 <systemProperty key="Editability" />
             </propertyGroup>
         </propertyGroup>

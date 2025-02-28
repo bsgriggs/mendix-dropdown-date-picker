@@ -101,11 +101,7 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
             AmPm: useAmPm ? dropdownState.AmPm : newDefaultState.AmPm
         };
         setDropdownState(newDropdownState);
-        // need timeout because handleChange is circularly defined
-        setTimeout(() => {
-            handleChange(newDropdownState);
-            setClearByWidget(false);
-        }, 100);
+        // do NOT call handleChange(), would cause infinite self reference
         return newDefaultState;
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [

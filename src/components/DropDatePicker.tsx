@@ -124,7 +124,6 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
     ]);
 
     useEffect(() => {
-        console.info("useEffect - props date", clearByWidget, props.date);
         // only reset the dropdown state if the date was cleared outside the widget
         if (clearByWidget === false) {
             // pass the props up to the state if the date changes inside Mendix
@@ -148,7 +147,6 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
     }, [props.date]);
 
     const handleChange = (newState: DropdownState): void => {
-        console.info("handleChange");
         // update the state with the param
         setDropdownState(newState);
         // create the params for a JavaScript date

@@ -17,26 +17,6 @@ export function getProperties(_values: DropdownDatePickerPreviewProps, defaultPr
 export function check(_values: DropdownDatePickerPreviewProps): Problem[] {
     const errors: Problem[] = [];
 
-    // if (_values.useDay === false && _values.useMonth === false && _values.useYear === false) {
-    //     errors.push(
-    //         {
-    //             property: `useDay`,
-    //             message: `At least 1 dropdown must be used.`,
-    //             url: "https://github.com/bsgriggs/mendix-dropdown-date-picker"
-    //         },
-    //         {
-    //             property: `useMonth`,
-    //             message: `At least 1 dropdown must be used.`,
-    //             url: "https://github.com/bsgriggs/mendix-dropdown-date-picker"
-    //         },
-    //         {
-    //             property: `useYear`,
-    //             message: `At least 1 dropdown must be used.`,
-    //             url: "https://github.com/bsgriggs/mendix-dropdown-date-picker"
-    //         }
-    //     );
-    // }
-
     return errors;
 }
 export const getDisplayName = (_values: DropdownDatePickerPreviewProps): string =>

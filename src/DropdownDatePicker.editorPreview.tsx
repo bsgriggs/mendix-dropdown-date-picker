@@ -23,6 +23,7 @@ export function preview(props: DropdownDatePickerPreviewProps): ReactElement {
             amPmLabel={props.amPmLabel}
             includeSuffix={props.includeDateSuffix}
             showClearBtn={props.showClearBtn}
+            showClearBtnWhileEmpty={props.showClearBtn}
             defaultYear={0}
             defaultMonth={0}
             defaultDay={0}

@@ -20,6 +20,7 @@ export interface DropDatePickerProps {
     dateFormat: string;
     // clear btn
     showClearBtn: boolean;
+    showClearBtnWhileEmpty: boolean;
     clearBtnTooltip?: string;
     clearBtnIcon?: WebIcon;
     // customization
@@ -264,15 +265,20 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
                     <Fragment />
                 );
             })}
-            {props.showClearBtn && props.readonly === false && (
-                <button className="btn mx-button btn-sm btn-default" onClick={() => handleChange(emptyDropdownState)}>
-                    <MxIcon
-                        defaultClassname="remove"
-                        title={props.clearBtnTooltip || "Clear Date"}
-                        mxIconOverride={props.clearBtnIcon}
-                    />
-                </button>
-            )}
+            {props.showClearBtn &&
+                props.readonly === false &&
+                (props.showClearBtnWhileEmpty || props.date !== undefined) && (
+                    <button
+                        className="btn mx-button btn-sm btn-default"
+                        onClick={() => handleChange(emptyDropdownState)}
+                    >
+                        <MxIcon
+                            defaultClassname="remove"
+                            title={props.clearBtnTooltip || "Clear Date"}
+                            mxIconOverride={props.clearBtnIcon}
+                        />
+                    </button>
+                )}
         </div>
     );
 }

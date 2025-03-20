@@ -42,6 +42,7 @@ const DropdownDatePicker = (props: DropdownDatePickerContainerProps): ReactEleme
                     readonly={props.date.readOnly}
                     // clear btn
                     showClearBtn={props.showClearBtn}
+                    showClearBtnWhileEmpty={props.showClearBtnWhenEmpty}
                     clearBtnIcon={props.clearBtnIcon?.value}
                     clearBtnTooltip={props.clearBtnTooltip.value}
                     // customization

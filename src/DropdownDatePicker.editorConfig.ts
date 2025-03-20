@@ -4,7 +4,7 @@ import { PreviewProps } from "../typings/PreviewProps";
 
 export function getProperties(_values: DropdownDatePickerPreviewProps, defaultProperties: Properties): Properties {
     if (!_values.showClearBtn) {
-        hidePropertiesIn(defaultProperties, _values, ["clearBtnIcon", "clearBtnTooltip"]);
+        hidePropertiesIn(defaultProperties, _values, ["clearBtnIcon", "clearBtnTooltip", "showClearBtnWhenEmpty"]);
     }
 
     if (_values.dateFormat !== "CUSTOM") {

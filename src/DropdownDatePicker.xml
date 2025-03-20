@@ -41,6 +41,10 @@
                     <caption>Show clear button?</caption>
                     <description></description>
                 </property>
+                <property key="showClearBtnWhenEmpty" type="boolean" defaultValue="true">
+                    <caption>Show while empty?</caption>
+                    <description></description>
+                </property>
                 <property key="clearBtnIcon" type="icon" required="false">
                     <caption>Clear button icon</caption>
                     <description></description>

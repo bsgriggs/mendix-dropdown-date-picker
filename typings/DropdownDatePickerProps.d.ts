@@ -18,6 +18,7 @@ export interface DropdownDatePickerContainerProps {
     dateFormat: DateFormatEnum;
     customDateFormat: DynamicValue<string>;
     showClearBtn: boolean;
+    showClearBtnWhenEmpty: boolean;
     clearBtnIcon?: DynamicValue<WebIcon>;
     clearBtnTooltip: DynamicValue<string>;
     minYear: DynamicValue<Big>;
@@ -49,6 +50,7 @@ export interface DropdownDatePickerPreviewProps {
     dateFormat: DateFormatEnum;
     customDateFormat: string;
     showClearBtn: boolean;
+    showClearBtnWhenEmpty: boolean;
     clearBtnIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; iconUrl: string; } | { type: "icon"; iconClass: string; } | undefined;
     clearBtnTooltip: string;
     minYear: string;

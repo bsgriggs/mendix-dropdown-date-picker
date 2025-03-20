@@ -41,6 +41,7 @@ When the date format is "custom", a dynamic text box will appear for the develop
 
 **Show clear button? -** Whether or not to show a button displayed after the last dropdown that the user can click to
 clear all the dropdowns at once.  
+**Show while empty? -** When true, the clear button will always render. When false, the clear button will only render if the date has a value.  
 **Clear button icon -** Override the clear button's icon with any icon or image  
 **Clear button tooltip -** The text shown if the user hovers on the clear button and is read by screen readers.  
 

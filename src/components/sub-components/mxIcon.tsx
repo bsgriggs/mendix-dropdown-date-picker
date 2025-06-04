@@ -10,11 +10,11 @@ interface IconProps {
 
 const MxIcon = (props: IconProps): ReactElement =>
     props.mxIconOverride !== undefined ? (
-        <div title={props.title}>
+        <div>
             <Icon icon={props.mxIconOverride} altText={props.title} />
         </div>
     ) : (
-        <span className={`glyphicon glyphicon-${props.defaultClassname}`} aria-hidden="true" title={props.title} />
+        <span className={`glyphicon glyphicon-${props.defaultClassname}`} aria-hidden="true" />
     );
 
 export default MxIcon;

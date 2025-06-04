@@ -269,13 +269,15 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
                 props.readonly === false &&
                 (props.showClearBtnWhileEmpty || props.date !== undefined) && (
                     <button
+                        title={props.clearBtnTooltip || "Clear Date"}
+                        aria-label={props.clearBtnTooltip || "Clear Date"}
                         className="btn mx-button btn-sm btn-default"
                         onClick={() => handleChange(emptyDropdownState)}
                     >
                         <MxIcon
                             defaultClassname="remove"
-                            title={props.clearBtnTooltip || "Clear Date"}
                             mxIconOverride={props.clearBtnIcon}
+                            title={props.clearBtnTooltip || "Clear Date"}
                         />
                     </button>
                 )}

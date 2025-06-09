@@ -60,9 +60,16 @@ Each setting controls how that part of the date is set when that part is NOT inc
 
 ### Text
 ![text](https://github.com/bsgriggs/dropdowndatepicker/blob/media/text.png)  
+**Aria-Label -** Label for screen-readers prepended to each dropdown label (e.g, "Created On" will read as 'Created On Year', 'Created On Month', 'Created On Day', etc.).  
+
+By default, the widget will prepend the existing on-screen label in the following manner.  
+
+"{On-Screen Label} {Aria-Label} {Dropdown Label}"
+
+**Dropdown Labels**  
 Each setting controls what text appears in each dropdown when the dropdown does NOT have a value.  
 
-If you would like to assist in translating these to other languages, create a [GitHub issue](https://github.com/bsgriggs/mendix-dropdown-date-picker/issues) with your language code and the value for each label.  
+_If you would like to assist in translating these to other languages, create a [GitHub issue](https://github.com/bsgriggs/mendix-dropdown-date-picker/issues) with your language code and the value for each label._  
 
 ### Events
 ![events](https://github.com/bsgriggs/dropdowndatepicker/blob/media/events.png)  

@@ -90,7 +90,7 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
 
     // include the provided SystemLabel in the aria-Label for each dropdown
     useEffect(() => {
-        //poll the label, the system label is NOT included in props so the widget cannot detect changes
+        // poll the label, the system label is NOT included in props so the widget cannot detect changes
         const interval = window.setInterval(() => {
             const labelElement = document.getElementById(`${props.id}-label`);
             setLabel(

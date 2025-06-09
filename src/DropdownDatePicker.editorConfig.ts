@@ -1,5 +1,5 @@
 import { DropdownDatePickerPreviewProps } from "../typings/DropdownDatePickerProps";
-import { Problem, Properties, hidePropertyIn, hidePropertiesIn } from "@mendix/pluggable-widgets-tools";
+import { Problem, Properties, hidePropertiesIn } from "@mendix/pluggable-widgets-tools";
 import { PreviewProps } from "../typings/PreviewProps";
 
 export function getProperties(_values: DropdownDatePickerPreviewProps, defaultProperties: Properties): Properties {
@@ -7,8 +7,55 @@ export function getProperties(_values: DropdownDatePickerPreviewProps, defaultPr
         hidePropertiesIn(defaultProperties, _values, ["clearBtnIcon", "clearBtnTooltip", "showClearBtnWhenEmpty"]);
     }
 
-    if (_values.dateFormat !== "CUSTOM") {
-        hidePropertyIn(defaultProperties, _values, "customDateFormat");
+    switch (_values.dateFormat) {
+        case "DATE":
+            hidePropertiesIn(defaultProperties, _values, [
+                "hourLabel",
+                "minuteLabel",
+                "secondLabel",
+                "amPmLabel",
+                "customDateFormat"
+            ]);
+            break;
+        case "MONTH":
+            hidePropertiesIn(defaultProperties, _values, [
+                "dayLabel",
+                "includeDateSuffix",
+                "hourLabel",
+                "minuteLabel",
+                "secondLabel",
+                "amPmLabel",
+                "customDateFormat"
+            ]);
+            break;
+        case "YEAR":
+            hidePropertiesIn(defaultProperties, _values, [
+                "monthLabel",
+                "dayLabel",
+                "includeDateSuffix",
+                "hourLabel",
+                "minuteLabel",
+                "secondLabel",
+                "amPmLabel",
+                "customDateFormat"
+            ]);
+            break;
+        case "TIME":
+            hidePropertiesIn(defaultProperties, _values, [
+                "yearLabel",
+                "minYear",
+                "maxYear",
+                "sortYearsAsc",
+                "monthLabel",
+                "dayLabel",
+                "customDateFormat"
+            ]);
+            break;
+        case "DATETIME":
+            hidePropertiesIn(defaultProperties, _values, ["customDateFormat"]);
+            break;
+        case "CUSTOM":
+            break;
     }
 
     return defaultProperties;

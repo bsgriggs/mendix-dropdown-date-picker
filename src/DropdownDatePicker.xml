@@ -78,7 +78,7 @@
             </property>
             <property key="includeDateSuffix" type="boolean" defaultValue="false">
                 <caption>Include date suffix</caption>
-                <description>Adds text after the day's number (i.e. 1st, 2nd, 3rd, 4th)</description>
+                <description>Adds text after the day's number (e.g., 1st, 2nd, 3rd, 4th)</description>
             </property>
             <property key="readOnlyDisplayType" type="enumeration" defaultValue="DROPDOWNS">
                 <caption>Read only display type</caption>
@@ -123,13 +123,15 @@
             </property>
         </propertyGroup>
         <propertyGroup caption="Text">
-            <propertyGroup caption="General">
+            <propertyGroup caption="Accessibility">
                 <property key="ariaLabel" type="textTemplate" required="false">
                     <caption>Aria Label</caption>
-                    <description>Label prepended to each dropdown label</description>
+                    <description>Label prepended to each dropdown label
+e.g, "Created On" will read as 'Created On Year'.
+By default, the widget will prepend the on-screen label.</description>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Dropdown labels">
+            <propertyGroup caption="Dropdown Labels">
                 <property key="yearLabel" type="textTemplate">
                     <caption>Year Label</caption>
                     <description></description>

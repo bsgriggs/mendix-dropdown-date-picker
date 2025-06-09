@@ -32,6 +32,7 @@ export interface DropdownDatePickerContainerProps {
     defaultHour: DynamicValue<Big>;
     defaultMinute: DynamicValue<Big>;
     defaultSecond: DynamicValue<Big>;
+    ariaLabel?: DynamicValue<string>;
     yearLabel: DynamicValue<string>;
     monthLabel: DynamicValue<string>;
     dayLabel: DynamicValue<string>;
@@ -64,6 +65,7 @@ export interface DropdownDatePickerPreviewProps {
     defaultHour: string;
     defaultMinute: string;
     defaultSecond: string;
+    ariaLabel: string;
     yearLabel: string;
     monthLabel: string;
     dayLabel: string;

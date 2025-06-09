@@ -123,55 +123,64 @@
             </property>
         </propertyGroup>
         <propertyGroup caption="Text">
-            <property key="yearLabel" type="textTemplate">
-                <caption>Year Label</caption>
-                <description></description>
-                <translations>
-                    <translation lang="en_US">Year</translation>
-                </translations>
-            </property>
-            <property key="monthLabel" type="textTemplate">
-                <caption>Month Label</caption>
-                <description></description>
-                <translations>
-                    <translation lang="en_US">Month</translation>
-                </translations>
-            </property>
-            <property key="dayLabel" type="textTemplate">
-                <caption>Day Label</caption>
-                <description></description>
-                <translations>
-                    <translation lang="en_US">Day</translation>
-                </translations>
-            </property>
-            <property key="hourLabel" type="textTemplate">
-                <caption>Hour Label</caption>
-                <description></description>
-                <translations>
-                    <translation lang="en_US">Hour</translation>
-                </translations>
-            </property>
-            <property key="minuteLabel" type="textTemplate">
-                <caption>Minute Label</caption>
-                <description></description>
-                <translations>
-                    <translation lang="en_US">Minute</translation>
-                </translations>
-            </property>
-            <property key="secondLabel" type="textTemplate">
-                <caption>Second Label</caption>
-                <description></description>
-                <translations>
-                    <translation lang="en_US">Second</translation>
-                </translations>
-            </property>
-            <property key="amPmLabel" type="textTemplate">
-                <caption>Am/Pm Label</caption>
-                <description></description>
-                <translations>
-                    <translation lang="en_US">Am/Pm</translation>
-                </translations>
-            </property>
+            <propertyGroup caption="General">
+                <property key="ariaLabel" type="textTemplate" required="false">
+                    <caption>Aria Label</caption>
+                    <description>Label prepended to each dropdown label</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Dropdown labels">
+                <property key="yearLabel" type="textTemplate">
+                    <caption>Year Label</caption>
+                    <description></description>
+                    <translations>
+                        <translation lang="en_US">Year</translation>
+                    </translations>
+                </property>
+                <property key="monthLabel" type="textTemplate">
+                    <caption>Month Label</caption>
+                    <description></description>
+                    <translations>
+                        <translation lang="en_US">Month</translation>
+                    </translations>
+                </property>
+                <property key="dayLabel" type="textTemplate">
+                    <caption>Day Label</caption>
+                    <description></description>
+                    <translations>
+                        <translation lang="en_US">Day</translation>
+                    </translations>
+                </property>
+                <property key="hourLabel" type="textTemplate">
+                    <caption>Hour Label</caption>
+                    <description></description>
+                    <translations>
+                        <translation lang="en_US">Hour</translation>
+                    </translations>
+                </property>
+                <property key="minuteLabel" type="textTemplate">
+                    <caption>Minute Label</caption>
+                    <description></description>
+                    <translations>
+                        <translation lang="en_US">Minute</translation>
+                    </translations>
+                </property>
+                <property key="secondLabel" type="textTemplate">
+                    <caption>Second Label</caption>
+                    <description></description>
+                    <translations>
+                        <translation lang="en_US">Second</translation>
+                    </translations>
+                </property>
+                <property key="amPmLabel" type="textTemplate">
+                    <caption>Am/Pm Label</caption>
+                    <description></description>
+                    <translations>
+                        <translation lang="en_US">Am/Pm</translation>
+                    </translations>
+                </property>
+            </propertyGroup>
+
         </propertyGroup>
         <propertyGroup caption="Events">
             <property key="onDateChange" type="action">

@@ -13,21 +13,25 @@ export interface DropDatePickerProps {
     // system
     id: string;
     tabIndex: number;
+
     // general
     date: Date | undefined;
     setDate: (newDate: Date | undefined) => void;
     readonly: boolean;
     dateFormat: string;
+
     // clear btn
     showClearBtn: boolean;
     showClearBtnWhileEmpty: boolean;
     clearBtnTooltip?: string;
     clearBtnIcon?: WebIcon;
+
     // customization
     includeSuffix: boolean;
     minYear: number;
     maxYear: number;
     sortYearsAsc: boolean;
+
     // defaults
     defaultYear: number;
     defaultMonth: number;
@@ -35,7 +39,9 @@ export interface DropDatePickerProps {
     defaultHour: number;
     defaultMinute: number;
     defaultSecond: number;
+
     // labels
+    ariaLabel: string | undefined;
     yearLabel: string;
     monthLabel: string;
     dayLabel: string;
@@ -43,6 +49,7 @@ export interface DropDatePickerProps {
     minuteLabel: string;
     secondLabel: string;
     amPmLabel: string;
+
     // events
     onEnter?: () => void;
     onLeave?: () => void;
@@ -83,9 +90,18 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
 
     // include the provided SystemLabel in the aria-Label for each dropdown
     useEffect(() => {
-        const labelElement = document.getElementById(`${props.id}-label`);
-        setLabel(labelElement ? `${labelElement.innerHTML} ` : "");
-    }, [props.id]);
+        //poll the label, the system label is NOT included in props so the widget cannot detect changes
+        const interval = window.setInterval(() => {
+            const labelElement = document.getElementById(`${props.id}-label`);
+            setLabel(
+                (labelElement ? `${labelElement.innerHTML} ` : "") + (props.ariaLabel ? `${props.ariaLabel} ` : "")
+            );
+        }, 500);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, [props.id, props.ariaLabel]);
 
     // values used when a useYear, useMonth etc is false
     const defaultDropdownState: DropdownState = useMemo(() => {

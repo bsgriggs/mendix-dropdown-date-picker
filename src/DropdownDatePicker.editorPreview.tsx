@@ -14,6 +14,7 @@ export function preview(props: DropdownDatePickerPreviewProps): ReactElement {
             minYear={0}
             maxYear={0}
             sortYearsAsc={false}
+            ariaLabel=""
             yearLabel={props.yearLabel}
             monthLabel={props.monthLabel}
             dayLabel={props.dayLabel}

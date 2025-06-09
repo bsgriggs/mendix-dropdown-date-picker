@@ -58,6 +58,7 @@ const DropdownDatePicker = (props: DropdownDatePickerContainerProps): ReactEleme
                     defaultMinute={Number(props.defaultMinute.value)}
                     defaultSecond={Number(props.defaultSecond.value)}
                     // text
+                    ariaLabel={props.ariaLabel?.value}
                     yearLabel={props.yearLabel.value as string}
                     monthLabel={props.monthLabel.value as string}
                     dayLabel={props.dayLabel.value as string}

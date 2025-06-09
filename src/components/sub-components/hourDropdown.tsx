@@ -51,7 +51,7 @@ const HourDropdown = (props: HourDropdownProps): ReactElement => {
                 id={props.id + "-hour"}
                 tabIndex={props.tabIndex}
                 className="form-control"
-                value={props.hour === -1 ? props.ariaLabel : props.hour}
+                value={props.hour === -1 ? props.defaultOption : props.hour}
                 onChange={handleSelect}
                 disabled={props.readonly}
                 aria-label={props.ariaLabel}
@@ -59,7 +59,7 @@ const HourDropdown = (props: HourDropdownProps): ReactElement => {
                 onBlur={props.onLeave}
             >
                 <option value={-1} aria-selected={props.hour === -1} selected={props.hour === -1}>
-                    {props.ariaLabel}
+                    {props.defaultOption}
                 </option>
                 {options}
             </select>

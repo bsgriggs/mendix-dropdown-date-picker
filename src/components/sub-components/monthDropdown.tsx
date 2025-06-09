@@ -47,10 +47,10 @@ const MonthDropdown = (props: monthDropdownProps): ReactElement => {
     return (
         <div className="month-dropdown">
             <select
-                id={props.id + "-month"}
+                id={`${props.id}-month`}
                 tabIndex={props.tabIndex}
                 className="form-control"
-                value={props.month === -1 ? props.ariaLabel : props.month}
+                value={props.month === -1 ? props.defaultOption : props.month}
                 onChange={handleSelect}
                 disabled={props.readonly}
                 aria-label={props.ariaLabel}
@@ -58,7 +58,7 @@ const MonthDropdown = (props: monthDropdownProps): ReactElement => {
                 onBlur={props.onLeave}
             >
                 <option value={-1} aria-selected={props.month === -1} selected={props.month === -1}>
-                    {props.ariaLabel}
+                    {props.defaultOption}
                 </option>
                 {options}
             </select>

@@ -70,18 +70,18 @@ const DayDropdown = (props: dayDropdownProps): ReactElement => {
     return (
         <div className="day-dropdown">
             <select
-                id={props.id + "-day"}
+                id={`${props.id}-day`}
                 tabIndex={props.tabIndex}
                 className="form-control"
                 disabled={props.readonly}
-                value={props.day === -1 ? props.ariaLabel : props.day}
+                value={props.day === -1 ? props.defaultOption : props.day}
                 onChange={handleSelect}
                 aria-label={props.ariaLabel}
                 onFocus={props.onEnter}
                 onBlur={props.onLeave}
             >
                 <option value={-1} aria-selected={props.day === -1}>
-                    {props.ariaLabel}
+                    {props.defaultOption}
                 </option>
                 {options}
             </select>

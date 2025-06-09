@@ -49,7 +49,7 @@ const MinuteDropdown = (props: MinuteDropdownProps): ReactElement => {
                 id={props.id + "-minute"}
                 tabIndex={props.tabIndex}
                 className="form-control"
-                value={props.minute === -1 ? props.ariaLabel : props.minute}
+                value={props.minute === -1 ? props.defaultOption : props.minute}
                 onChange={handleSelect}
                 disabled={props.readonly}
                 aria-label={props.ariaLabel}
@@ -57,7 +57,7 @@ const MinuteDropdown = (props: MinuteDropdownProps): ReactElement => {
                 onBlur={props.onLeave}
             >
                 <option value={-1} aria-selected={props.minute === -1} selected={props.minute === -1}>
-                    {props.ariaLabel}
+                    {props.defaultOption}
                 </option>
                 {options}
             </select>

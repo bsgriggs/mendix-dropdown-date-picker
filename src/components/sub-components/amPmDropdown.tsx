@@ -22,7 +22,7 @@ const AmPmDropdown = (props: AmPmDropdownProps): ReactElement => {
     return (
         <div className="am-pm-dropdown">
             <select
-                id={props.id + "-am-pm"}
+                id={`${props.id}-am-pm`}
                 tabIndex={props.tabIndex}
                 className="form-control"
                 value={props.amPm}

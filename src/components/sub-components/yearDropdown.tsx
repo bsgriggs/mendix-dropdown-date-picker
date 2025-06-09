@@ -66,7 +66,7 @@ const YearDropdown = (props: yearDropdownProps): ReactElement => {
                 id={props.id + "-year"}
                 tabIndex={props.tabIndex}
                 className="year-dropdown form-control"
-                value={props.year === 0 ? props.ariaLabel : props.year}
+                value={props.year === 0 ? props.defaultOption : props.year}
                 onChange={handleSelect}
                 disabled={props.readonly}
                 aria-label={props.ariaLabel}
@@ -74,7 +74,7 @@ const YearDropdown = (props: yearDropdownProps): ReactElement => {
                 onBlur={props.onLeave}
             >
                 <option value={-1} aria-selected={props.year === -1} selected={props.year === -1}>
-                    {props.ariaLabel}
+                    {props.defaultOption}
                 </option>
                 {options}
             </select>

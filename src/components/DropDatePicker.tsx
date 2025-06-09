@@ -79,6 +79,13 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
     const useMinute: boolean = useMemo(() => props.dateFormat.includes("m"), [props.dateFormat]);
     const useSecond: boolean = useMemo(() => props.dateFormat.includes("s"), [props.dateFormat]);
     const useAmPm: boolean = useMemo(() => props.dateFormat.includes("h"), [props.dateFormat]);
+    const [label, setLabel] = useState<string>("");
+
+    // include the provided SystemLabel in the aria-Label for each dropdown
+    useEffect(() => {
+        const labelElement = document.getElementById(`${props.id}-label`);
+        setLabel(labelElement ? `${labelElement.innerHTML} ` : "");
+    }, [props.id]);
 
     // values used when a useYear, useMonth etc is false
     const defaultDropdownState: DropdownState = useMemo(() => {
@@ -171,7 +178,8 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
                 return char.toLowerCase() === "y" ? (
                     <YearDropdown
                         {...props}
-                        ariaLabel={props.yearLabel}
+                        ariaLabel={`${label}${props.yearLabel}`}
+                        defaultOption={props.yearLabel}
                         minYear={props.minYear}
                         maxYear={props.maxYear}
                         sortYearsAsc={props.sortYearsAsc}
@@ -185,7 +193,8 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
                 ) : char === "M" ? (
                     <MonthDropdown
                         {...props}
-                        ariaLabel={props.monthLabel}
+                        ariaLabel={`${label}${props.monthLabel}`}
+                        defaultOption={props.monthLabel}
                         month={dropdownState.month}
                         dropdownFormat={props.dateFormat.substring(
                             props.dateFormat.indexOf("M"),
@@ -196,7 +205,8 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
                 ) : char === "d" ? (
                     <DayDropdown
                         {...props}
-                        ariaLabel={props.dayLabel}
+                        ariaLabel={`${label}${props.dayLabel}`}
+                        defaultOption={props.dayLabel}
                         includeSuffix={props.includeSuffix}
                         setDay={(newDay: number) => handleChange({ ...dropdownState, day: newDay })}
                         dropdownFormat={props.dateFormat.substring(
@@ -210,7 +220,8 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
                 ) : char.toLowerCase() === "h" ? (
                     <HourDropdown
                         {...props}
-                        ariaLabel={props.hourLabel}
+                        ariaLabel={`${label}${props.hourLabel}`}
+                        defaultOption={props.hourLabel}
                         hour={dropdownState.hour}
                         setHour={(newHour: number) => handleChange({ ...dropdownState, hour: newHour })}
                         dropdownFormat={props.dateFormat.substring(
@@ -223,7 +234,8 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
                 ) : char === "m" ? (
                     <MinuteDropdown
                         {...props}
-                        ariaLabel={props.minuteLabel}
+                        ariaLabel={`${label}${props.minuteLabel}`}
+                        defaultOption={props.minuteLabel}
                         minute={dropdownState.minute}
                         setMinute={(newMinute: number) => handleChange({ ...dropdownState, minute: newMinute })}
                         dropdownFormat={props.dateFormat.substring(
@@ -234,7 +246,8 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
                 ) : char === "s" ? (
                     <SecondDropdown
                         {...props}
-                        ariaLabel={props.secondLabel}
+                        ariaLabel={`${label}${props.secondLabel}`}
+                        defaultOption={props.secondLabel}
                         second={dropdownState.second}
                         setSecond={(newSecond: number) => handleChange({ ...dropdownState, second: newSecond })}
                         dropdownFormat={props.dateFormat.substring(
@@ -245,7 +258,8 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
                 ) : char === "a" ? (
                     <AmPmDropdown
                         {...props}
-                        ariaLabel={props.amPmLabel}
+                        ariaLabel={`${label}${props.amPmLabel}`}
+                        defaultOption={props.amPmLabel}
                         amPm={dropdownState.AmPm}
                         setAmPm={(newAmPm: "AM" | "PM") => {
                             let newHour = dropdownState.hour;
@@ -271,6 +285,7 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
                     <button
                         title={props.clearBtnTooltip || "Clear Date"}
                         aria-label={props.clearBtnTooltip || "Clear Date"}
+                        aria-describedby={`${props.id}-label`}
                         className="btn mx-button btn-sm btn-default"
                         onClick={() => handleChange(emptyDropdownState)}
                     >

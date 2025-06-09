@@ -49,7 +49,7 @@ const SecondDropdown = (props: SecondDropdownProps): ReactElement => {
                 id={props.id + "-second"}
                 tabIndex={props.tabIndex}
                 className="form-control"
-                value={props.second === -1 ? props.ariaLabel : props.second}
+                value={props.second === -1 ? props.defaultOption : props.second}
                 onChange={handleSelect}
                 disabled={props.readonly}
                 aria-label={props.ariaLabel}
@@ -57,7 +57,7 @@ const SecondDropdown = (props: SecondDropdownProps): ReactElement => {
                 onBlur={props.onLeave}
             >
                 <option value={-1} aria-selected={props.second === -1} selected={props.second === -1}>
-                    {props.ariaLabel}
+                    {props.defaultOption}
                 </option>
                 {options}
             </select>

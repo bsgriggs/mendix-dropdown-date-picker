@@ -4,6 +4,7 @@ export default interface ICommonDropdownProps {
     readonly: boolean;
     dropdownFormat: string;
     ariaLabel: string;
+    defaultOption: string;
     onLeave?: () => void;
     onEnter?: () => void;
     onChange?: () => void;

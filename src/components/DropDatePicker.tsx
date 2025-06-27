@@ -193,6 +193,7 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
                 const char = dateFormatSegment.charAt(0);
                 return char.toLowerCase() === "y" ? (
                     <YearDropdown
+                        key="years"
                         {...props}
                         ariaLabel={`${label}${props.yearLabel}`}
                         defaultOption={props.yearLabel}
@@ -208,6 +209,7 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
                     />
                 ) : char === "M" ? (
                     <MonthDropdown
+                        key="months"
                         {...props}
                         ariaLabel={`${label}${props.monthLabel}`}
                         defaultOption={props.monthLabel}
@@ -220,6 +222,7 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
                     />
                 ) : char === "d" ? (
                     <DayDropdown
+                        key="days"
                         {...props}
                         ariaLabel={`${label}${props.dayLabel}`}
                         defaultOption={props.dayLabel}
@@ -235,6 +238,7 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
                     />
                 ) : char.toLowerCase() === "h" ? (
                     <HourDropdown
+                        key="hours"
                         {...props}
                         ariaLabel={`${label}${props.hourLabel}`}
                         defaultOption={props.hourLabel}
@@ -249,6 +253,7 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
                     />
                 ) : char === "m" ? (
                     <MinuteDropdown
+                        key="minutes"
                         {...props}
                         ariaLabel={`${label}${props.minuteLabel}`}
                         defaultOption={props.minuteLabel}
@@ -261,6 +266,7 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
                     />
                 ) : char === "s" ? (
                     <SecondDropdown
+                        key="seconds"
                         {...props}
                         ariaLabel={`${label}${props.secondLabel}`}
                         defaultOption={props.secondLabel}
@@ -273,6 +279,7 @@ export function DropDatePicker(props: DropDatePickerProps): ReactElement {
                     />
                 ) : char === "a" ? (
                     <AmPmDropdown
+                        key="ampm"
                         {...props}
                         ariaLabel={`${label}${props.amPmLabel}`}
                         defaultOption={props.amPmLabel}

@@ -1,40 +1,46 @@
 {
-    "name": "dropdowndatepicker",
-    "widgetName": "DropdownDatePicker",
-    "version": "4.2.0",
-    "description": "Datepicker with a dropdowns for Day, Month, and Year with dynamic selection",
-    "copyright": "Benjamin Griggs",
-    "author": "Benjamin Griggs",
-    "engines": {
-        "node": ">=18"
-    },
-    "config": {
-        "projectPath": "../../",
-        "mendixHost": "http://localhost:8082",
-        "developmentPort": "3000"
-    },
-    "packagePath": "mendix",
-    "scripts": {
-        "start": "pluggable-widgets-tools start:server --open",
-        "dev": "pluggable-widgets-tools start:web",
-        "build": "pluggable-widgets-tools build:web",
-        "lint": "pluggable-widgets-tools lint",
-        "lint:fix": "pluggable-widgets-tools lint:fix",
-        "prerelease": "npm run lint",
-        "release": "pluggable-widgets-tools release:web"
-    },
-    "license": "MIT",
-    "devDependencies": {
-        "@mendix/pluggable-widgets-tools": "~9.24.0",
-        "@types/big.js": "^4.0.5",
-        "eslint-plugin-react": "^7.35.0"
-    },
-    "resolutions": {
-        "react": "18.2.0",
-        "react-native": "0.70.7"
-    },
-    "overrides": {
-        "react": "18.2.0",
-        "react-native": "0.70.7"
-    }
+  "name": "dropdowndatepicker",
+  "widgetName": "DropdownDatePicker",
+  "version": "5.0.0",
+  "description": "Datepicker with a dropdowns for Day, Month, and Year with dynamic selection",
+  "copyright": "Benjamin Griggs",
+  "author": "Benjamin Griggs",
+  "engines": {
+    "node": ">=22"
+  },
+  "config": {
+    "projectPath": "../../",
+    "mendixHost": "http://localhost:8082",
+    "developmentPort": "3000"
+  },
+  "packagePath": "mendix",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:server --open",
+    "dev": "pluggable-widgets-tools start:web",
+    "build": "pluggable-widgets-tools build:web",
+    "lint": "pluggable-widgets-tools lint",
+    "lint:fix": "pluggable-widgets-tools lint:fix",
+    "prerelease": "npm run lint",
+    "release": "pluggable-widgets-tools release:web"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "~10.21.1",
+    "@types/big.js": "^4.0.5",
+    "eslint-plugin-react": "^7.35.0"
+  },
+  "resolutions": {
+    "react": "18.2.0",
+    "react-native": "0.72.7",
+    "react-dom": "18.2.0",
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0"
+  },
+  "overrides": {
+    "react": "18.2.0",
+    "react-native": "0.72.7",
+    "react-dom": "18.2.0",
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0"
+  }
 }

@@ -47,6 +47,8 @@ export interface DropdownDatePickerContainerProps {
 
 export interface DropdownDatePickerPreviewProps {
     readOnly: boolean;
+    renderMode: "design" | "xray" | "structure";
+    translate: (text: string) => string;
     date: string;
     dateFormat: DateFormatEnum;
     customDateFormat: string;
